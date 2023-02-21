@@ -27,7 +27,7 @@ namespace Hotel.Controllers
             KorisnikBO korisnik = korisnikRepository.GetKorisnikByUsername(username);
 
             //Wrong username
-            if(korisnik == null)
+            if (korisnik == null)
             {
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewBag.Error = "Uneli ste pogrešno korisničko ime!";
@@ -70,22 +70,19 @@ namespace Hotel.Controllers
 
         //Register a user
         [HttpPost]
-        public async Task<IActionResult> Register(string username, string password, string name, string last_name, string email, KorisnikService korisnikService)
-        {
-            KorisnikBO korisnik = new KorisnikBO()
+        public IActionResult Register(KorisnikBO korisnik, KorisnikService korisnikService)
+        {      
+            //validate input
+            if(!ModelState.IsValid)
             {
-                Email = email,
-                KorisnickoIme = username,
-                Password = BCrypt.Net.BCrypt.HashPassword(password),
-                Ime = name,
-                Prezime = last_name,
-            };
-            
+                return View(korisnik);
+            }
+            //Add entity to database
             try
             {
                 korisnikService.Register(korisnik);
                 return RedirectToAction("Login", "Account");
-            } catch(Exception ex)
+            } catch(Exception ex) // Unique Index violation
             {
                 ViewBag.Error = "Korisnik već postoji!";
                 return View();
