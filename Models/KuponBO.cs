@@ -4,5 +4,6 @@
     {
         public int KuponID { get; set; }
         public bool Iskoriscen { get; set; } = false;
+        public Rezervacija Rezervacija { get; set; }
     }
 }
