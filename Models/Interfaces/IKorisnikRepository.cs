@@ -4,6 +4,8 @@
     {
         public void AddKorisnik(KorisnikBO korisnik);
         public void RemoveKorisnik(KorisnikBO korisnik);
+        public void UpdateKorisnik(KorisnikBO korisnik, int ID);
+        public IEnumerable<KorisnikBO> GetAllKorisnike();
         public KorisnikBO GetKorisnikByUsername(string username);
 
     }

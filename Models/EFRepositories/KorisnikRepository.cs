@@ -10,7 +10,7 @@ namespace Hotel.Models.EFRepositories
         public void AddKorisnik(KorisnikBO korisnik)
         {
             try {
-                hotelEntities.Add(new Korisnik()
+                hotelEntities.Korisnici.Add(new Korisnik()
                 {
                     KorisnickoIme = korisnik.KorisnickoIme,
                     Password = korisnik.Password,
@@ -27,6 +27,27 @@ namespace Hotel.Models.EFRepositories
             }
            
         }
+        //Returns an IEnumerable of all the users
+        public IEnumerable<KorisnikBO> GetAllKorisnike()
+        {
+            List<KorisnikBO> korisnici = new List<KorisnikBO>();
+            foreach(Korisnik kor in hotelEntities.Korisnici)
+            {
+                korisnici.Add(new KorisnikBO()
+                {
+                    KorisnikID = kor.KorisnikID,
+                    KorisnickoIme = kor.KorisnickoIme,
+                    Password = kor.Password,
+                    Ime = kor.Ime,
+                    Prezime= kor.Prezime,
+                    Email = kor.Email,
+                    Rola = kor.Rola
+                }); 
+            }
+
+            return korisnici;
+        }
+
         // Returns a Korisnik Business Object of the entity with matching username
         public KorisnikBO GetKorisnikByUsername(string username)
         {
@@ -45,10 +66,41 @@ namespace Hotel.Models.EFRepositories
                 };
             } else return new KorisnikBO();
         }
+        //Removes the passed user 
 
         public void RemoveKorisnik(KorisnikBO korisnik)
         {
-            throw new NotImplementedException();
+            try
+            {
+                hotelEntities.Korisnici.Remove(hotelEntities.Korisnici.Where(kor => kor.KorisnikID == korisnik.KorisnikID).Single());
+                hotelEntities.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+            
+
+        }
+        //Updates the user with the passed ID with the data from the passed KorisnikBO
+        public void UpdateKorisnik(KorisnikBO korisnik, int ID)
+        {
+            try
+            {
+                Korisnik korisnikEntity = hotelEntities.Korisnici.Where(kor => kor.KorisnikID == ID).Single();
+                korisnikEntity.Email = korisnik.Email;
+                korisnikEntity.KorisnickoIme = korisnik.KorisnickoIme;
+                korisnikEntity.Ime = korisnik.Ime;
+                korisnikEntity.Prezime = korisnik.Prezime;
+                korisnikEntity.Password = korisnik.Password;
+                korisnikEntity.Rola = korisnik.Rola;
+
+                hotelEntities.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }
