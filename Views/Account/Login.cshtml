@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
+<div class="container-md d-flex flex-column flex-grow-1 gap-2 align-items-center ">
+    <h1 class="text-center">Ulogujte se</h1>
+    <form class="w-25 text-center d-flex flex-column rounded-1 align-items-center" asp-controller="Account" asp-action="Login" method="post">
+        <input class="form-control mb-1" name="username" type="text" placeholder="Korisnicko Ime" />
+        <input class="form-control mb-1" name="password" type="password" placeholder="Password" />
+        <input class="text-center btn btn-primary" type="submit" value="Ulogujte se!" />
+    </form>
+    <span>Nemate profil? <a href="Register">Registrujte se!</a></span>
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <h2 class="alert-danger p-2">@ViewBag.Error</h2>
+    }
+</div>
