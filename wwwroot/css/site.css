@@ -1,5 +1,5 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -15,4 +15,15 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+/*Custom css*/
+.showcase {
+    background-image: url("../images/showcase.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 16rem;
+}
+.showcase-text {
+    background-color: rgba(0,0,0,0.3);
 }
