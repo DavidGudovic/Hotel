@@ -1,27 +1,92 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<!-- Showcase -->
 <div class="showcase d-flex flex-column align-items-center justify-content-center fw-bold text-light">
     <div class="showcase-text d-flex flex-grow-1 w-100 flex-column align-items-center justify-content-center">
-        <h1>Hotel Zlatibor</h1>
-        <p>Lorem ipsum dolor sit amet lorem ipsum dolor sit amet</p>
+        <img height="200px" class="logo" src="~/images/logo.svg" />
     </div>
 </div>
+<!-- End showcase -->
 
-<div class="card mb-3">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+<!-- Accomodations -->
+<div class="d-flex justify-content-between gap-4 mt-5 ">
+
+    <div class="w-50">
+        <h2 class="text-decoration-underline fw-bold">Smeštaj</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat turpis ante, quis pharetra lectus dapibus ac.
+            Vestibulum fringilla magna lorem, sit amet mollis augue ultrices non. Sed dapibus convallis tempus. Ut sit amet sodales ante, 
+            ac feugiat odio. Vestibulum at mi gravida, dictum erat in, vehicula ante. Nullam sollicitudin ultrices tellus, quis congue libero 
+            varius eu. Donec ac enim in nisl convallis fermentum. Sed dictum iaculis iaculis. Sed dapibus augue nec molestie facilisis.</p>
+    </div>
+    <!-- Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide w-50" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/images/room1_1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/room2_1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/room3_1.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </div>
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+<!-- End accomodations -->
+<!-- Activities -->
+<div class="d-flex justify-content-between gap-4 mt-5">
+
+    <!-- Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide w-50" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/images/room1_1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/room2_1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/room3_1.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <img src="..." class="card-img-bottom" alt="...">
+
+    <div class="w-50">
+        <h2 class="text-decoration-underline fw-bold">Aktivnosti</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat turpis ante, quis pharetra lectus dapibus ac.
+            Vestibulum fringilla magna lorem, sit amet mollis augue ultrices non. Sed dapibus convallis tempus. Ut sit amet sodales ante,
+            ac feugiat odio. Vestibulum at mi gravida, dictum erat in, vehicula ante. Nullam sollicitudin ultrices tellus, quis congue libero
+            varius eu. Donec ac enim in nisl convallis fermentum. Sed dictum iaculis iaculis. Sed dapibus augue nec molestie facilisis.
+        </p>
+    </div>
 </div>
+<!-- End Activities -->
