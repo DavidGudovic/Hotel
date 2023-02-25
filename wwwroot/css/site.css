@@ -27,3 +27,8 @@ body {
 .showcase-text {
     background-color: rgba(0,0,0,0.3);
 }
+
+.logo {
+    /* to black */
+    filter: invert(1);
+}
