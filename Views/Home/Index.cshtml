@@ -2,29 +2,29 @@
     ViewData["Title"] = "Home Page";
 }
 <!-- Showcase -->
-<div class="showcase d-flex flex-column align-items-center justify-content-center fw-bold text-light">
+<div class="showcase d-flex flex-column align-items-center justify-content-center fw-bold text-light mt-3">
     <div class="showcase-text d-flex flex-grow-1 w-100 flex-column align-items-center justify-content-center">
         <img height="200px" class="logo" src="~/images/logo.svg" />
     </div>
 </div>
 <!-- End showcase -->
-
+<h2 class="text-center m-2 mt-5 fw-bold fst-italic">Oseti   ~   Doživi   ~   Uživaj!</h2>
 <!-- Accomodations -->
-<div class="d-flex justify-content-between gap-4 mt-5 ">
+<div class="row mt-5">
 
-    <div class="w-50">
+    <div class="col-lg-6 p-2">
         <h2 class="text-decoration-underline fw-bold">Smeštaj</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat turpis ante, quis pharetra lectus dapibus ac.
-            Vestibulum fringilla magna lorem, sit amet mollis augue ultrices non. Sed dapibus convallis tempus. Ut sit amet sodales ante, 
-            ac feugiat odio. Vestibulum at mi gravida, dictum erat in, vehicula ante. Nullam sollicitudin ultrices tellus, quis congue libero 
-            varius eu. Donec ac enim in nisl convallis fermentum. Sed dictum iaculis iaculis. Sed dapibus augue nec molestie facilisis.</p>
+        <p>
+            Dobrodošli u naš hotel! Naša misija je da Vam pružimo nezaboravan boravak i učinimo Vaš odmor što prijatnijim. Smeštaj u našem hotelu je vrhunski, sa udobnim krevetima i modernim sadržajima, kako bi se osećali kao kod kuće.
+            Naša recepcija radi 24 sata dnevno, tako da smo uvek tu da Vam pružimo podršku i pomoć u bilo kojem trenutku. Naše ljubazno osoblje će se potruditi da Vaš boravak kod nas bude što prijatniji.
+        </p>
     </div>
     <!-- Carousel -->
-    <div id="carouselExampleIndicators" class="carousel slide w-50" data-bs-ride="carousel">
+    <div id="carouselAccomodation" class="carousel slide col-lg-6" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselAccomodation" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselAccomodation" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselAccomodation" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -37,11 +37,11 @@
                 <img src="~/images/room3_1.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselAccomodation" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselAccomodation" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -49,44 +49,50 @@
 </div>
 <!-- End accomodations -->
 <!-- Activities -->
-<div class="d-flex justify-content-between gap-4 mt-5">
+<div class="row mt-5">
+
+    <div class="col-lg-6 order-md-2 p-2">
+        <h2 class="text-decoration-underline fw-bold">Aktivnosti</h2>
+        <p>
+            U našem hotelu možete uživati u mnogim sadržajima, kao što su bazen, spa centar, restoran i bar. Takođe, nudimo i razne aktivnosti za decu i odrasle, kao što su skijanje, paraglajdin i jahanje konja na našem hipodromu.
+            Naša lokacija je takođe idealna, jer se nalazimo u blizini brojnih turističkih atrakcija i gradskih znamenitosti. Bilo da ste u gradu zbog posla ili zadovoljstva, naš hotel je idealno mesto za smeštaj.
+        </p>
+    </div>
 
     <!-- Carousel -->
-    <div id="carouselExampleIndicators" class="carousel slide w-50" data-bs-ride="carousel">
+    <div id="carouselActivities" class="carousel slide col-lg-6 order-md-1" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselActivities" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselActivities" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselActivities" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="~/images/room1_1.jpg" class="d-block w-100" alt="...">
+                <img src="~/images/activity_1.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="~/images/room2_1.jpg" class="d-block w-100" alt="...">
+                <img src="~/images/activity_2.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="~/images/room3_1.jpg" class="d-block w-100" alt="...">
+                <img src="~/images/activity_3.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselActivities" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselActivities" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
-    <div class="w-50">
-        <h2 class="text-decoration-underline fw-bold">Aktivnosti</h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat turpis ante, quis pharetra lectus dapibus ac.
-            Vestibulum fringilla magna lorem, sit amet mollis augue ultrices non. Sed dapibus convallis tempus. Ut sit amet sodales ante,
-            ac feugiat odio. Vestibulum at mi gravida, dictum erat in, vehicula ante. Nullam sollicitudin ultrices tellus, quis congue libero
-            varius eu. Donec ac enim in nisl convallis fermentum. Sed dictum iaculis iaculis. Sed dapibus augue nec molestie facilisis.
-        </p>
-    </div>
 </div>
+<!-- Call to action -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="h1 mb-3">Vidimo se uskoro u našem hotelu!</h2>
+        <p class="lead mb-4 px-5">Rezervišite Vaš boravak kod nas danas i uživajte u luksuznom smestaju, ljubaznom osoblju i obilju sadržaja koje nudimo.</p>
+        <a href="/Ponuda" class="btn btn-primary">Pogledajte našu ponudu</a>
+    </div>
+</section>
 <!-- End Activities -->

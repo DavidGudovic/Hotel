@@ -2,30 +2,48 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model Hotel.Models.KorisnikBO
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                        <img src="~/images/logo.svg" alt="Hotel Zlatibor Logo" class="img-fluid" style="max-height: 80px;">
+                    </div>
+                    <h2 class="text-center mt-3 mb-4">Registracija</h2>
+                    <hr />
+                    <form class="d-flex flex-column justify-items-center gap-1" asp-controller="Account" asp-action="Register" method="post">
 
-<div class="container-md d-flex flex-column flex-grow-1 gap-2 align-items-center ">
-    <h1 class="text-center">Registracija</h1>
-    <form class="w-25 text-center d-flex flex-column rounded-1 align-items-center" asp-controller="Account" asp-action="Register" method="post">
+                        <input asp-for="KorisnickoIme" class="form-control mb-1" id="username" type="text" placeholder="Korisnicko Ime" />
+                        <span asp-validation-for="KorisnickoIme" class="text-danger"></span>
 
-        <input asp-for="KorisnickoIme" class ="form-control mb-1"  id="username" type="text" placeholder="Korisnicko Ime" />
-        <span  asp-validation-for="KorisnickoIme" class="text-danger"></span>
+                        <input asp-for="Email" class="form-control mb-1" id="email" type="text" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
 
-        <input asp-for="Email" class="form-control mb-1"  id="email" type="text" placeholder="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+                        <input asp-for="Ime" class="form-control mb-1" id="name" type="text" placeholder="Ime" />
+                        <span asp-validation-for="Ime" class="text-danger"></span>
 
-        <input asp-for="Ime" class="form-control mb-1" id="name" type="text" placeholder="Ime"/>
-        <span asp-validation-for="Ime" class="text-danger"></span>
+                        <input asp-for="Prezime" class="form-control mb-1" id="last_name" type="text" placeholder="Prezime" />
+                        <span asp-validation-for="Prezime" class="text-danger"></span>
 
-        <input asp-for="Prezime" class="form-control mb-1"  id="last_name" type="text" placeholder="Prezime" />
-        <span asp-validation-for="Prezime" class="text-danger"></span>
+                        <input asp-for="Password" class="form-control mb-1" id="password" type="password" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
 
-        <input asp-for="Password" class="form-control mb-1"  id="password" type="password" placeholder="Password" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-
-        <input class="text-center btn btn-primary" type="submit" value="Registrujte se" />
-    </form>
-    @if (!string.IsNullOrEmpty(ViewBag.Error))
-    {
-        <h2 class="alert-danger p-2">@ViewBag.Error</h2>
-    }
+                        <input class="text-center btn btn-primary" type="submit" value="Registrujte se" />
+                    </form>
+                    <hr />
+                    @if (!string.IsNullOrEmpty(ViewBag.Error))
+                    {
+                        <h2 class="alert-danger p-2 mt-1">@ViewBag.Error</h2>
+                    }
+                     <div class="text-center">
+                        <p class="mb-0">Imate nalog?</p>
+                        <a href="/Account/Login" class="text-decoration-none">Ulogujte se ovde</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+

@@ -5,16 +5,41 @@
     var returnUrl = ViewData["ReturnUrl"] as string;
 }
 
-<div class="container-md d-flex flex-column flex-grow-1 gap-2 align-items-center ">
-    <h1 class="text-center">Ulogujte se</h1>
-    <form class="w-25 text-center d-flex flex-column rounded-1 align-items-center" asp-controller="Account" asp-action="Login" method="post">
-        <input class="form-control mb-1" name="username" type="text" placeholder="Korisnicko Ime" />
-        <input class="form-control mb-1" name="password" type="password" placeholder="Password" />
-        <input class="text-center btn btn-primary" type="submit" value="Ulogujte se!" />
-    </form>
-    <span>Nemate profil? <a href="Register">Registrujte se!</a></span>
-    @if (!string.IsNullOrEmpty(ViewBag.Error))
-    {
-        <h2 class="alert-danger p-2">@ViewBag.Error</h2>
-    }
+
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-white">
+                    <img src="~/images/logo.svg" alt="Hotel Zlatibor Logo" class="img-fluid mb-3" style="max-width: 150px;">
+                    <h4 class="mb-0">Prijava</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-area="" asp-action="Login" asp-controller="Account" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Korisničko ime</label>
+                            <input type="text" name="username" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Lozinka</label>
+                            <input type="password" name="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Prijavite se</button>
+                    </form>
+                    <hr>
+                    @if (!string.IsNullOrEmpty(ViewBag.Error))
+                    {
+                        <h2 class="alert-danger p-2">@ViewBag.Error</h2>
+                    }
+                    <div class="text-center">
+                        <p class="mb-0">Nemate nalog?</p>
+                        <a href="/Account/Register" class="text-decoration-none">Registrujte se ovde</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
