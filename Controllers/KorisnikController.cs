@@ -9,7 +9,6 @@ namespace Hotel.Controllers
     public class KorisnikController : Controller
     {
         //Return a user information index page
-        [Authorize(Roles = "Admin")]
         public IActionResult Index(KorisnikRepository korisnikRepository)
         {
             KorisnikBO korisnik = korisnikRepository.GetKorisnikByUsername(User.Identity.Name);
@@ -21,11 +20,14 @@ namespace Hotel.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Korisnik");
+                return View("Index", korisnik);
+            }
+            else {
+
+                korisnikService.UpdateKorisnik(korisnik, korisnik.KorisnikID);
+                return Ok();
             }
 
-            korisnikService.UpdateKorisnik(korisnik, korisnik.KorisnikID);
-            return Ok();
         }
     }
 }
