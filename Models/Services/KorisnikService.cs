@@ -8,6 +8,10 @@ namespace Hotel.Models.Services
     public class KorisnikService
     {
         private IKorisnikRepository korisnikRepository = new KorisnikRepository();
+        public void UpdateKorisnik(KorisnikBO korisnik, int ID)
+        {
+
+        }
         public void Register(KorisnikBO korisnikBO)
         {
             korisnikBO.Password = BCrypt.Net.BCrypt.HashPassword(korisnikBO.Password);
