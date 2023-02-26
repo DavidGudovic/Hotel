@@ -27,10 +27,10 @@ namespace Hotel.Controllers
             KorisnikBO korisnik = korisnikRepository.GetKorisnikByUsername(username);
 
             //Wrong username
-            if (korisnik == null)
+            if (korisnik.KorisnickoIme == null)
             {
                 ViewData["ReturnUrl"] = returnUrl;
-                ViewBag.Error = "Uneli ste pogrešno korisničko ime!";
+                ViewBag.Error = "Korisnik ne postoji!";
                 return View();
               
             }
