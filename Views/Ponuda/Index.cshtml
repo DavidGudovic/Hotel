@@ -3,3 +3,77 @@
 *@
 @{
 }
+
+@model List<PonudaBO>
+
+<div class="container pt-2">
+    <h1 class="text-center mt-4 mb-1">Dostupni apartmani</h1>
+
+    <div class="row mt-4">
+        <!-- Filter -->
+        <form asp-action="Index" asp-controller="Ponuda" method="get" class="col-md-3">
+            <h5>Filtriraj apartmane</h5>
+
+            <div class="mb-3">
+                <label class="form-label">Broj soba</label>
+                <select name="numOfRooms" class="form-select">
+                    <option selected>Svi apartmani</option>
+                    <option value="1">Jednosobni</option>
+                    <option value="2">Dvosobni</option>
+                    <option value="3">Trosobni</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Sprat</label>
+                <select name="floor" class="form-select">
+                    <option selected>Svi apartmani</option>
+                    <option value="1">Prizemlje</option>
+                    <option value="2">Prvi sprat</option>
+                    <option value="3">Drugi sprat</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tip</label>
+                <select name="tip" class="form-select">
+                    <option selected>Svi apartmani</option>
+                    <option value="Luks">Luksuzni</option>
+                    <option value="Komfort">Komforni</option>
+                    <option value="Zlatibor">Zlatiborski</option>
+                </select>
+            </div>
+            <input type="submit" class="btn btn-primary mb-3" value="Primeni filtere" />
+        </form>
+        <!-- End Filter -->
+        <!-- Ponude Section-->
+        <div class="col-md-9">
+            <!-- Ponude-->
+            <div class="row">
+                @foreach (PonudaBO ponuda in Model)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="~/images/apartments/@(ponuda.Slika).jpg" class="card-img-top" alt="Apartman slika">
+                            <div class="card-body d-flex flex-column">
+                                <p class="card-title">Cena po danu: @ponuda.CenaPoDanu RSD</p>
+                                <div class="flex-grow-1">
+                                    <hr>
+                                    <p class="card-text m-auto">@ponuda.Opis</p>
+                                </div>
+                                <hr>
+                                <p class="card-text">Broj soba: @ponuda.BrojSoba | Sprat: @ponuda.Sprat | Tip: @ponuda.Tip.ToString()</p>
+                                <a href="/Ponuda/Show/@ponuda.PonudaID" class="btn btn-primary">Rezerviši</a>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                <!-- End ponude -->
+            </div>
+            <!-- End ponuda card-->
+        </div>
+        <!-- End ponude section -->
+    </div>
+</div>

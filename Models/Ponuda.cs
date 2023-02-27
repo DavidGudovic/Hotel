@@ -6,7 +6,7 @@ namespace Hotel.Models
 {
     public enum Tip
     {
-        Polupansion, Pansion, AllInclusive, Najam
+        Lux, Komfort, Zlatibor
     }
     public class Ponuda
     {
@@ -14,6 +14,7 @@ namespace Hotel.Models
         public int PonudaID { get; set; }
         public int BrojSoba { get; set; }
         public int Sprat { get; set; }
+        public string Opis { get; set; }
         public string Slika { get; set; }
         public float CenaPoDanu { get; set; }
         public Tip Tip { get; set; }
