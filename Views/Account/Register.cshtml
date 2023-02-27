@@ -14,19 +14,19 @@
                     <hr />
                     <form class="d-flex flex-column justify-items-center gap-1" asp-controller="Account" asp-action="Register" method="post">
 
-                        <input asp-for="KorisnickoIme" class="form-control mb-1" id="username" type="text" placeholder="Korisnicko Ime" />
+                        <input asp-for="KorisnickoIme" class="form-control mt-1" id="username" type="text" placeholder="Korisnicko Ime" />
                         <span asp-validation-for="KorisnickoIme" class="text-danger"></span>
 
-                        <input asp-for="Email" class="form-control mb-1" id="email" type="text" placeholder="Email" />
+                        <input asp-for="Email" class="form-control mt-1" id="email" type="text" placeholder="Email" />
                         <span asp-validation-for="Email" class="text-danger"></span>
 
-                        <input asp-for="Ime" class="form-control mb-1" id="name" type="text" placeholder="Ime" />
+                        <input asp-for="Ime" class="form-control mt-1" id="name" type="text" placeholder="Ime" />
                         <span asp-validation-for="Ime" class="text-danger"></span>
 
-                        <input asp-for="Prezime" class="form-control mb-1" id="last_name" type="text" placeholder="Prezime" />
+                        <input asp-for="Prezime" class="form-control mt-1" id="last_name" type="text" placeholder="Prezime" />
                         <span asp-validation-for="Prezime" class="text-danger"></span>
 
-                        <input asp-for="Password" class="form-control mb-1" id="password" type="password" placeholder="Password" />
+                        <input asp-for="Password" class="form-control mt-1" id="password" type="password" placeholder="Password" />
                         <span asp-validation-for="Password" class="text-danger"></span>
 
                         <input class="text-center btn btn-primary" type="submit" value="Registrujte se" />

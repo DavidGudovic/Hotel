@@ -48,6 +48,27 @@ namespace Hotel.Models.EFRepositories
             return korisnici;
         }
 
+        // Returns a Korisnik Business Object of the entity with matching id
+        public KorisnikBO GetKorisnikByID(int korisnikID)
+        {
+            Korisnik? korisnikEntity = hotelEntities.Korisnici.Where(kor => kor.KorisnikID == korisnikID).FirstOrDefault();
+
+            if (korisnikEntity != null)
+            {
+                return new KorisnikBO()
+                {
+                    KorisnikID = korisnikEntity.KorisnikID,
+                    KorisnickoIme = korisnikEntity.KorisnickoIme,
+                    Ime = korisnikEntity.Ime,
+                    Prezime = korisnikEntity.Prezime,
+                    Password = korisnikEntity.Password,
+                    Email = korisnikEntity.Email,
+                    Rola = korisnikEntity.Rola
+                };
+            }
+            else return new KorisnikBO();
+        }
+
         // Returns a Korisnik Business Object of the entity with matching username
         public KorisnikBO GetKorisnikByUsername(string username)
         {

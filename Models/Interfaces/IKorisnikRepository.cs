@@ -7,6 +7,6 @@
         public void UpdateKorisnik(KorisnikBO korisnik, int ID);
         public IEnumerable<KorisnikBO> GetAllKorisnike();
         public KorisnikBO GetKorisnikByUsername(string username);
-
+        public KorisnikBO GetKorisnikByID(int korisnikID);
     }
 }
