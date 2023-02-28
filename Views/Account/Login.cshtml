@@ -16,6 +16,7 @@
                 </div>
                 <div class="card-body">
                     <form asp-area="" asp-action="Login" asp-controller="Account" method="post">
+                        <input type="hidden" name="returnUrl" value="@returnUrl" />
                         <div class="mb-3">
                             <label for="username" class="form-label">Korisničko ime</label>
                             <input type="text" name="username" class="form-control" id="username" required>
