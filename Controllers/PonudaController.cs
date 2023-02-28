@@ -1,4 +1,5 @@
 ﻿using Hotel.Models;
+using Hotel.Models.EFRepositories;
 using Hotel.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,18 +8,20 @@ namespace Hotel.Controllers
 {
     public class PonudaController : Controller
     {
-        public IActionResult Index(PonudaService ponudaService, int? numOfRooms, int? floor, Tip? tip)
+        public IActionResult Index(PonudaService ponudaService, int? numOfBeds, int? floor, Tip? tip)
         {
-            ViewBag.numOfRooms = numOfRooms;
+            ViewBag.numOfBeds = numOfBeds;
             ViewBag.floor = floor;
             ViewBag.tip = tip;
-            return View(ponudaService.filterPonude(numOfRooms,floor,tip));
+            return View(ponudaService.filterPonude(numOfBeds,floor,tip));
         }
 
         [Authorize]
-        public IActionResult Show(int ponudaID)
+        [HttpGet]
+        public IActionResult Show(int ponudaID, PonudaService ponudaService, PonudaRepository ponudaRepository)
         {
-            return View();
+            ViewBag.bookedDates = ponudaService.GetUnavailableDates(ponudaID).Select(date => date.ToString("yyyy-MM-dd")).ToList(); 
+            return View(ponudaRepository.GetById(ponudaID));
         }
     }
 }

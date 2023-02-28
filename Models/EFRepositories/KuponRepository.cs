@@ -27,7 +27,8 @@ namespace Hotel.Models.EFRepositories
         {
             try
             {
-                hotelEntities.Kuponi.Remove(hotelEntities.Kuponi.Where(kup => kup.KuponID == kuponId).FirstOrDefault()); 
+                hotelEntities.Kuponi.Remove(hotelEntities.Kuponi.Where(kup => kup.KuponID == kuponId).FirstOrDefault());
+                hotelEntities.SaveChanges();
             }
             catch
             {

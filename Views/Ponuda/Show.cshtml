@@ -2,45 +2,47 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    @model RezervacijaBO;
+    @model PonudaBO;
 }
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
-            <img src="~/images/apartments/1.jpg" class="img-fluid rounded mb-3" alt="Apartment 1">
-            <h3>Lux apartman 1</h3>
-            <p class="mb-2">Ovaj luksuzni apartman ima 2 spavaće sobe sa bračnim krevetima i prostranim dnevnim boravkom sa kaučem na razvlačenje. Ukupno može ugostiti do 6 osoba. Apartman se nalazi na 2. spratu sa predivnim pogledom na planine. Ima modernu kuhinju sa svim potrebnim aparatima, 2 kupatila sa tušem i kadom, kao i terasu sa baštenskim nameštajem.</p>
+            <img src="~/images/apartments/@(Model.Slika).jpg" class="img-fluid rounded mb-3" alt="Apartman slika">
+            <h3>@Model.Tip.ToString() apartman @Model.PonudaID</h3>
+            <p class="mb-2">@Model.Opis</p>
         </div>
         <div class="col-md-6">
-            <form>
+            <form asp-controller="Rezervacija" asp-action="Create" method="post">
                 <h1 class="text-centered">Rezervacija</h1>
                 <hr />
+                <!-- Hidden inputs -->
+                <input type="hidden" id="bookedDates" value="@Html.Raw(Json.Serialize(ViewBag.BookedDates))">
+                <input type="hidden" name="ponuda_id" value="@Model.PonudaID" />
                 <div class="form-group mb-3">
                     <label for="checkin">Datum dolaska</label>
-                    <input type="text" class="form-control" id="checkin" asp-for="DatumPocetka" readonly>
+                    <input type="text" class="form-control" id="checkin" name="checkin" readonly>
                 </div>
                 <div class="form-group mb-3">
                     <label for="checkout">Datum odlaska</label>
-                    <input type="text" class="form-control" id="checkout" asp-for="DatumKraja" readonly>
+                    <input type="text" class="form-control" id="checkout" name="checkout" readonly>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="guests">Broj gostiju:</label>
-                    <select class="form-control" id="guests" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
+                    <select class="form-control" id="guests" name="guests" required>
+                        @for(int i = 1; i <= Model.BrojKreveta; i++)
+                        {
+                            <!option value="@i">@i</!option>
+                        }
                     </select>
                 </div>
                 <div class="form-group mb-3">
                     <label for="coupon">Kupon:</label>
-                    <input type="text" class="form-control" id="coupon" placeholder="Ukoliko imate kupon, unesite ga ovde">
+                    <input type="text" class="form-control" id="coupon" name="coupon" placeholder="Ukoliko imate kupon, unesite ga ovde">
                 </div>
                 <div class="form-group mb-3">
-                    <p>Subtotal: <strong>12000</strong> RSD | Total: <strong>10000</strong> RSD</p>
+                    <!-- TODO Make it reflect actual price-->
+                    <p>Subtotal: @Model.CenaPoDanu RSD | Total:  @Model.CenaPoDanu RSD</p>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Rezerviši</button>
@@ -48,3 +50,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    var bookedDates = @Html.Raw(Json.Serialize(ViewBag.BookedDates));
+    console.log(bookedDates);
+</script>

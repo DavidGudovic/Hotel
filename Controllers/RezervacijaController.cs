@@ -1,4 +1,5 @@
 ﻿using Hotel.Models;
+using Hotel.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hotel.Controllers
@@ -11,9 +12,11 @@ namespace Hotel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(RezervacijaBO rezervacija)
+        public IActionResult Create(RezervacijaService rezervacijaService, int ponuda_id, DateTime checkin, DateTime checkout, int guests, string? coupon)
         {
-            return View();
+            //TODO validation
+            rezervacijaService.CreateReservation(ponuda_id, @User.Identity.Name, checkin, checkout, guests, coupon);
+            return RedirectToAction("Show/?" + ponuda_id, "Ponuda");
         }
     }
 }

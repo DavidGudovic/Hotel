@@ -17,12 +17,12 @@
             <h5>Filtriraj apartmane</h5>
 
             <div class="mb-3">
-                <label class="form-label">Broj soba</label>
-                <select name="numOfRooms" class="form-select">
-                    <!option  @(ViewBag.numOfRooms == null ? "selected" : "")>Svi apartmani</!option>
-                    <!option value="1" @(ViewBag.numOfRooms == 1 ? "selected" : "")>Jednosobni</!option>
-                    <!option value="2" @(ViewBag.numOfRooms == 2 ? "selected" : "")>Dvosobni</!option>
-                    <!option value="3" @(ViewBag.numOfRooms == 3 ? "selected" : "")>Trosobni</!option>
+                <label class="form-label">Broj kreveta</label>
+                <select name="numOfBeds" class="form-select">
+                    <!option  @(ViewBag.numOfBeds == null ? "selected" : "")>Svi apartmani</!option>
+                    <!option value="1" @(ViewBag.numOfBeds == 1 ? "selected" : "")>Jednokrevetni</!option>
+                    <!option value="2" @(ViewBag.numOfBeds == 2 ? "selected" : "")>Dvokrevetni</!option>
+                    <!option value="3" @(ViewBag.numOfBeds == 3 ? "selected" : "")>Trokrevetni</!option>
                 </select>
             </div>
 
@@ -64,8 +64,8 @@
                                     <p class="card-text m-auto">@ponuda.Opis</p>
                                 </div>
                                 <hr>
-                                <p class="card-text">Broj soba: @ponuda.BrojSoba | Sprat: @ponuda.Sprat | Tip: @ponuda.Tip.ToString()</p>
-                                <a href="/Ponuda/Show/@ponuda.PonudaID" class="btn btn-primary">Rezerviši</a>
+                                <p class="card-text">Broj kreveta: @ponuda.BrojKreveta | Sprat: @ponuda.Sprat | Tip: @ponuda.Tip.ToString()</p>
+                                <a href="/Ponuda/Show/?ponudaID=@ponuda.PonudaID" class="btn btn-primary">Rezerviši</a>
                             </div>
                         </div>
                     </div>

@@ -18,7 +18,7 @@ namespace Hotel.Models.EFRepositories
                 ponude.Add(new PonudaBO
                 {
                    PonudaID = ponuda.PonudaID,
-                   BrojSoba = ponuda.BrojSoba,
+                   BrojKreveta = ponuda.BrojKreveta,
                    Sprat = ponuda.Sprat,
                    Slika = ponuda.Slika,
                    Opis = ponuda.Opis,
@@ -32,7 +32,17 @@ namespace Hotel.Models.EFRepositories
 
         public PonudaBO GetById(int id)
         {
-            throw new NotImplementedException();
+              Ponuda ponudaEntity = hotelEntities.Ponude.Where(pon => pon.PonudaID== id).FirstOrDefault();
+              return new PonudaBO()
+              {
+                  PonudaID = id,
+                  BrojKreveta = ponudaEntity.BrojKreveta,
+                  Sprat = ponudaEntity.Sprat,
+                  Tip = ponudaEntity.Tip,
+                  CenaPoDanu = ponudaEntity.CenaPoDanu,
+                  Opis = ponudaEntity.Opis,
+                  Slika = ponudaEntity.Slika
+              };
         }
 
         public void RemovePonuda(int id)

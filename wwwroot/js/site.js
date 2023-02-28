@@ -3,12 +3,6 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
-    var bookedDates = [
-        '2023-03-01',
-        '2023-03-02',
-        '2023-03-03',
-        '2023-03-09'
-    ];
 
     // Initialize checkin datepicker
     $('#checkin').datepicker({
