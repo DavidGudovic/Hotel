@@ -2,13 +2,15 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    int? floor = ViewBag.floor;
+    Tip? tip = ViewBag.tip;
 }
 
 @model List<PonudaBO>
 
 <div class="container pt-2">
     <h1 class="text-center mt-4 mb-1">Dostupni apartmani</h1>
-
+    <hr />
     <div class="row mt-4">
         <!-- Filter -->
         <form asp-action="Index" asp-controller="Ponuda" method="get" class="col-md-3">
@@ -17,30 +19,30 @@
             <div class="mb-3">
                 <label class="form-label">Broj soba</label>
                 <select name="numOfRooms" class="form-select">
-                    <option selected>Svi apartmani</option>
-                    <option value="1">Jednosobni</option>
-                    <option value="2">Dvosobni</option>
-                    <option value="3">Trosobni</option>
+                    <!option  @(ViewBag.numOfRooms == null ? "selected" : "")>Svi apartmani</!option>
+                    <!option value="1" @(ViewBag.numOfRooms == 1 ? "selected" : "")>Jednosobni</!option>
+                    <!option value="2" @(ViewBag.numOfRooms == 2 ? "selected" : "")>Dvosobni</!option>
+                    <!option value="3" @(ViewBag.numOfRooms == 3 ? "selected" : "")>Trosobni</!option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Sprat</label>
                 <select name="floor" class="form-select">
-                    <option selected>Svi apartmani</option>
-                    <option value="1">Prizemlje</option>
-                    <option value="2">Prvi sprat</option>
-                    <option value="3">Drugi sprat</option>
+                    <!option @(ViewBag.floor == null ? "selected" : "")>Svi apartmani</!option>
+                    <!option value="1" @(ViewBag.floor == 1 ? "selected" : "")>Prizemlje</!option>
+                    <!option value="2" @(ViewBag.floor == 2 ? "selected" : "")>Prvi sprat</!option>
+                    <!option value="3" @(ViewBag.floor == 3 ? "selected" : "")>Drugi sprat</!option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Tip</label>
                 <select name="tip" class="form-select">
-                    <option selected>Svi apartmani</option>
-                    <option value="Luks">Luksuzni</option>
-                    <option value="Komfort">Komforni</option>
-                    <option value="Zlatibor">Zlatiborski</option>
+                    <!option @(ViewBag.Tip == null ? "selected" : "")>Svi apartmani</!option>
+                    <!option value="Lux" @(ViewBag.Tip == Tip.Lux ? "selected" : "")>Luksuzni</!option>
+                    <!option value="Komfort" @(ViewBag.Tip == Tip.Komfort ? "selected" : "")>Komforni</!option>
+                    <!option value="Zlatibor" @(ViewBag.Tip == Tip.Zlatibor ? "selected" : "")>Zlatiborski</!option>
                 </select>
             </div>
             <input type="submit" class="btn btn-primary mb-3" value="Primeni filtere" />
