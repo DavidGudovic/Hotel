@@ -16,13 +16,14 @@
                 <h1 class="text-centered">Rezervacija</h1>
                 <hr />
                 <div class="form-group mb-3">
-                    <label for="checkin">Datum dolaska:</label>
-                    <input type="date" class="form-control" id="checkin" required>
+                    <label for="checkin">Datum dolaska</label>
+                    <input type="text" class="form-control" id="checkin" asp-for="DatumPocetka" readonly>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="checkout">Datum odlaska:</label>
-                    <input type="date" class="form-control" id="checkout" required>
+                    <label for="checkout">Datum odlaska</label>
+                    <input type="text" class="form-control" id="checkout" asp-for="DatumKraja" readonly>
                 </div>
+
                 <div class="form-group mb-3">
                     <label for="guests">Broj gostiju:</label>
                     <select class="form-control" id="guests" required>
