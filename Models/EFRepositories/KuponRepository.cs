@@ -1,9 +1,10 @@
 ﻿using Hotel.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hotel.Models.EFRepositories
 {
     public class KuponRepository : IKuponRepository
-    {
+    { 
         private HotelContext hotelEntities = new HotelContext();
         public void AddKupon(KuponBO kupon)
         {
@@ -13,7 +14,7 @@ namespace Hotel.Models.EFRepositories
                 {
                     KuponID = kupon.KuponID,
                     Iskoriscen = kupon.Iskoriscen,
-                    Rezervacija = kupon.Rezervacija
+                    Rezervacija = hotelEntities.Rezervacije.Where(rez => rez.RezervacijaID == kupon.Rezervacija.RezervacijaID).First()
                 }) ;
                 hotelEntities.SaveChanges();
             }
@@ -23,11 +24,11 @@ namespace Hotel.Models.EFRepositories
             }
         }
 
-        public void DeleteKupon(int kuponId)
+        public void DeleteKupon(string kuponID)
         {
             try
             {
-                hotelEntities.Kuponi.Remove(hotelEntities.Kuponi.Where(kup => kup.KuponID == kuponId).FirstOrDefault());
+                hotelEntities.Kuponi.Remove(hotelEntities.Kuponi.Where(kup => kup.KuponID == kuponID).FirstOrDefault());
                 hotelEntities.SaveChanges();
             }
             catch
@@ -39,37 +40,42 @@ namespace Hotel.Models.EFRepositories
         public IEnumerable<KuponBO> GetAllKupons()
         {
             List<KuponBO> kuponi = new List<KuponBO>();
-            foreach(Kupon kupon in hotelEntities.Kuponi)
+            foreach(Kupon kupon in hotelEntities.Kuponi.Include(kup => kup.Rezervacija))
             {
                 kuponi.Add(new KuponBO()
                 {
                     KuponID = kupon.KuponID,
                     Iskoriscen = kupon.Iskoriscen,
-                    Rezervacija = kupon.Rezervacija
+                    Rezervacija = new RezervacijaBO()
+                    {
+                        RezervacijaID = kupon.Rezervacija.RezervacijaID
+                    }
                 });
             }
             return kuponi;
         }
 
-        public KuponBO GetKupon(int kuponId)
+        public KuponBO GetKupon(string kuponID)
         {
-            Kupon kupon = hotelEntities.Kuponi.Where(kup => kup.KuponID == kuponId).FirstOrDefault();
+            Kupon kupon = hotelEntities.Kuponi.Where(kup => kup.KuponID == kuponID).FirstOrDefault();
             return new KuponBO()
             {
-                KuponID = kuponId,
+                KuponID = kuponID,
                 Iskoriscen = kupon.Iskoriscen,
-                Rezervacija = kupon.Rezervacija
+                Rezervacija = new RezervacijaBO()
+                {
+                    RezervacijaID = kupon.Rezervacija.RezervacijaID
+                }
             };
         }
 
-        public void UpdateKupon(KuponBO kupon, int kuponID)
-        {
-            Kupon kuponEntity = hotelEntities.Kuponi.Where(kup => kup.KuponID == kuponID).FirstOrDefault();
-            kuponEntity.Rezervacija = kupon.Rezervacija;
-            kuponEntity.Iskoriscen = kupon.Iskoriscen;
-
+        public void UpdateKupon(KuponBO kupon, string kuponID)
+        {         
             try
             {
+                Kupon kuponEntity = hotelEntities.Kuponi.Where(kup => kup.KuponID == kuponID).FirstOrDefault();
+                kuponEntity.Rezervacija = hotelEntities.Rezervacije.Where(rez => rez.RezervacijaID == kuponEntity.Rezervacija.RezervacijaID).First();
+                kuponEntity.Iskoriscen = kupon.Iskoriscen;
                 hotelEntities.SaveChanges();
             }
             catch

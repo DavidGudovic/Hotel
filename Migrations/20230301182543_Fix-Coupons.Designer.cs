@@ -4,6 +4,7 @@ using Hotel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hotel.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    partial class HotelContextModelSnapshot : ModelSnapshot
+    [Migration("20230301182543_Fix-Coupons")]
+    partial class FixCoupons
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,17 +68,21 @@ namespace Hotel.Migrations
 
             modelBuilder.Entity("Hotel.Models.Kupon", b =>
                 {
-                    b.Property<string>("KuponID")
+                    b.Property<string>("DUPLICATEID")
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
                     b.Property<bool>("Iskoriscen")
                         .HasColumnType("bit");
 
+                    b.Property<string>("KuponID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RezervacijaID")
                         .HasColumnType("int");
 
-                    b.HasKey("KuponID");
+                    b.HasKey("DUPLICATEID");
 
                     b.HasIndex("RezervacijaID");
 

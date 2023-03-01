@@ -28,3 +28,8 @@ html {
     /* to black */
     filter: invert(1);
 }
+
+/* Calendar */
+td.day.disabled{
+    color: orangered !important;
+}

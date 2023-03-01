@@ -3,9 +3,9 @@
     public interface IKuponRepository
     {
         public void AddKupon(KuponBO kupon);
-        public void DeleteKupon(int kuponId);
-        public void UpdateKupon(KuponBO kupon, int kuponID);
+        public void DeleteKupon(string kuponId);
+        public void UpdateKupon(KuponBO kupon, string kuponID);
         public IEnumerable<KuponBO> GetAllKupons();
-        public KuponBO GetKupon(int kuponId);
+        public KuponBO GetKupon(string kuponId);
     }
 }

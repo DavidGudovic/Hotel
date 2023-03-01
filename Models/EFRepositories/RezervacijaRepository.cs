@@ -6,11 +6,13 @@ namespace Hotel.Models.EFRepositories
     public class RezervacijaRepository : IRezervacijaRepository
     {
         private HotelContext hotelEntities = new HotelContext();
-        public void AddRezervacija(RezervacijaBO rezervacija)
+
+        //Returns the new entity ID 
+        public int AddRezervacija(RezervacijaBO rezervacija)
         {
             try
             {
-                hotelEntities.Rezervacije.Add(new Rezervacija()
+                Rezervacija reservationEntity = new Rezervacija()
                 {
                     DatumKraja = rezervacija.DatumKraja,
                     DatumPocetka = rezervacija.DatumPocetka,
@@ -19,8 +21,10 @@ namespace Hotel.Models.EFRepositories
                     Ponuda = hotelEntities.Ponude.Where(pon => pon.PonudaID == rezervacija.Ponuda.PonudaID).First(),
                     Korisnik = hotelEntities.Korisnici.Where(kor => kor.KorisnikID == rezervacija.Korisnik.KorisnikID).First(),
                     BrojGostiju = rezervacija.BrojGostiju
-                });
+                };
+                hotelEntities.Rezervacije.Add(reservationEntity);
                 hotelEntities.SaveChanges();
+                return reservationEntity.RezervacijaID;
             }
             catch
             {

@@ -2,8 +2,8 @@
 {
     public class KuponBO
     {
-        public int KuponID { get; set; }
+        public string KuponID { get; set; }
         public bool Iskoriscen { get; set; } = false;
-        public Rezervacija Rezervacija { get; set; }
+        public RezervacijaBO Rezervacija { get; set; }
     }
 }

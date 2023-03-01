@@ -7,7 +7,8 @@ namespace Hotel.Models
     public class Kupon
     {
         [Key]
-        public int KuponID { get; set; }
+        [MaxLength(8)]
+        public string KuponID { get; set; }
         public bool Iskoriscen { get; set; } = false;
         public Rezervacija Rezervacija { get; set; }
 

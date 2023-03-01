@@ -3,6 +3,7 @@
 *@
 @{
     @model PonudaBO;
+
 }
 <div class="container mt-5">
     <div class="row">
@@ -18,40 +19,90 @@
                 <!-- Hidden inputs -->
                 <input type="hidden" id="bookedDates" value="@Html.Raw(Json.Serialize(ViewBag.BookedDates))">
                 <input type="hidden" name="ponuda_id" value="@Model.PonudaID" />
+
+                <!-- DATE PICKERS-->
                 <div class="form-group mb-3">
                     <label for="checkin">Datum dolaska</label>
-                    <input type="text" class="form-control" id="checkin" name="checkin" readonly>
+                    <input type="text" class="form-control" id="checkin" name="checkin" readonly placeholder="Kliknite da odaberete datum dolaska">
                 </div>
                 <div class="form-group mb-3">
                     <label for="checkout">Datum odlaska</label>
-                    <input type="text" class="form-control" id="checkout" name="checkout" readonly>
+                    <input type="text" class="form-control" id="checkout" name="checkout" disabled readonly>
+                    <!-- Date validation -->
+                    @if (TempData["ErrorDate"] is not null)
+                    {
+                        @if (!String.IsNullOrEmpty(TempData["ErrorDate"].ToString()))
+                        {
+                            <span class="text-danger mt-2">
+                                @TempData["ErrorDate"].ToString()
+                            </span>
+                        }
+                    }
                 </div>
-
+                <!-- Number of guests-->
                 <div class="form-group mb-3">
                     <label for="guests">Broj gostiju:</label>
                     <select class="form-control" id="guests" name="guests" required>
-                        @for(int i = 1; i <= Model.BrojKreveta; i++)
+                        @for (int i = 1; i <= Model.BrojKreveta; i++)
                         {
                             <!option value="@i">@i</!option>
                         }
                     </select>
                 </div>
+                <!--Coupon-->
                 <div class="form-group mb-3">
                     <label for="coupon">Kupon:</label>
                     <input type="text" class="form-control" id="coupon" name="coupon" placeholder="Ukoliko imate kupon, unesite ga ovde">
+                    <!-- Coupon validation -->
+                    @if (TempData["ErrorCoupon"] is not null)
+                    {
+                        @if (!String.IsNullOrEmpty(TempData["ErrorCoupon"].ToString()))
+                        {
+                            <span class="text-danger mt-2" >
+                                @TempData["ErrorCoupon"].ToString()
+                            </span>
+                        }
+                    }
                 </div>
                 <div class="form-group mb-3">
-                    <!-- TODO Make it reflect actual price-->
-                    <p>Subtotal: @Model.CenaPoDanu RSD | Total:  @Model.CenaPoDanu RSD</p>
+                    <!-- Value changed with JS -->
+                    <p>Subtotal: <span id="subtotal">0</span> RSD | Total:  <span id="total">0</span> RSD</p>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Rezerviši</button>
             </form>
+            <!-- Message -->
+            @if (TempData["ThankYou"] is not null)
+            {
+                @if (!String.IsNullOrEmpty(TempData["ThankYou"].ToString()))
+                {
+                    <div class="alert alert-success mt-4 text-center" role="alert">
+                        @Html.Raw(@TempData["ThankYou"].ToString())
+                    </div>
+                }
+            }
+
+            @if (TempData["Error"] is not null)
+            {
+                @if (!String.IsNullOrEmpty(TempData["Error"].ToString()))
+                {
+                    <div class="alert alert-danger mt-4 text-center" role="alert">
+                        @TempData["Error"].ToString()
+                    </div>
+                }
+            }
+
         </div>
     </div>
 </div>
 
 <script>
     var bookedDates = @Html.Raw(Json.Serialize(ViewBag.BookedDates));
-    console.log(bookedDates);
+    var pricePerDay = @Model.CenaPoDanu;
 </script>
+
+
+@section Scripts {
+    <script src="~/js/reservation.js"></script>
+}
+
