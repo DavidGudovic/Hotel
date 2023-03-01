@@ -6,9 +6,10 @@ namespace Hotel.Controllers
 {
     public class RezervacijaController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(RezervacijaService rezervacijaService)
         {
-            return View();
+            List<RezervacijaBO> reservations = rezervacijaService.ReservationHistory(User.Identity.Name);
+            return View(reservations);
         }
 
         [HttpPost]
@@ -70,6 +71,13 @@ namespace Hotel.Controllers
             }
 
             return RedirectToAction("Show", "Ponuda", new { ponudaID = ponuda_id });
+        }
+
+        [HttpPost]
+        public IActionResult Update(RezervacijaService rezervacijaService, int rezervacijaID)
+        {
+            rezervacijaService.CancelReservation(rezervacijaID);
+            return RedirectToAction("Index", "Rezervacija");
         }
     }
 }

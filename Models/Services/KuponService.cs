@@ -6,7 +6,7 @@ namespace Hotel.Models.Services
     public class KuponService
     {
         private KuponRepository kuponRepository = new KuponRepository();
-        //Sets the coupon used to true and changes the foreign key to point to the reservation that its used on
+        //Sets the coupon used to true 
         public bool ApplyCoupon(string couponID, RezervacijaBO rezervacija)
         {
             if(DoesCouponCodeExists(couponID))

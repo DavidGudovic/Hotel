@@ -84,5 +84,35 @@ namespace Hotel.Models.EFRepositories
             }
             
         }
+
+        //Returns a coupon gotten from Reservation or null
+        public KuponBO? GetKuponByRezervacija(int rezervacijaID)
+        {
+            try
+            {
+                Kupon? kuponEntity = hotelEntities.Kuponi.Where(kup => kup.Rezervacija.RezervacijaID == rezervacijaID).FirstOrDefault();
+                if(kuponEntity is not null)
+                {
+                    return new KuponBO()
+                    {
+                        KuponID = kuponEntity.KuponID,
+                        Iskoriscen = kuponEntity.Iskoriscen,
+                        Rezervacija = new RezervacijaBO()
+                        {
+                            RezervacijaID = rezervacijaID
+                        }
+                       
+                    };
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

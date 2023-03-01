@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model List<RezervacijaBO>
+
+}
+
+
+<div class="container">
+    <h1 class="text-center mt-5 mb-5">Vaše Rezervacije</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+        @foreach (RezervacijaBO rezervacija in Model)
+        {
+            <!-- Reservation Card -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="~/images/apartments/@(rezervacija.Ponuda.Slika).jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a class="card-title" href="/Ponuda/Show/?ponudaID=@rezervacija.Ponuda.PonudaID">Apartman @rezervacija.Ponuda.Tip.ToString() @rezervacija.Ponuda.PonudaID</a>
+                        <hr>
+                        <p class="card-text">Trajanje: @rezervacija.DatumPocetka.ToString("dd-MM-yyyy") do @rezervacija.DatumKraja.ToString("dd-MM-yyyy")</p>
+                        <p class="card-text status-@rezervacija.Status.ToString()">
+                           Status: @rezervacija.Status.ToString()
+                        </p>
+                        <p class="card-text">Cena: @rezervacija.Cena RSD</p>
+                        <form method="post" asp-action="Update" asp-controller="Rezervacija" method="post" class="row g-2">
+                            <input type="hidden" name="rezervacijaID" value="@rezervacija.RezervacijaID" />
+                            @if(rezervacija.Status == Status.Rezervisana)
+                            {
+                                <button type="submit" class="col btn btn-danger">Otkaži rezervaciju</button>
+                            }
+                            else
+                            {
+
+                                @Html.ActionLink("Naša ponuda", "Index", "Ponuda", null, new {@class = "btn btn-primary col"})
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

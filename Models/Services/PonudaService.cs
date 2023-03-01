@@ -34,7 +34,7 @@ namespace Hotel.Models.Services
         //Linq magic
         public IEnumerable<DateTime> GetUnavailableDates(int ponudaID)
         {
-            List<RezervacijaBO> reservations = (List<RezervacijaBO>)rezervacijaRepository.GetAllRezervacijeByPonuda(ponudaID);
+            List<RezervacijaBO> reservations = rezervacijaRepository.GetAllRezervacijeByPonuda(ponudaID).Where(rez => rez.Status == Status.Rezervisana).ToList();
 
             List<DateTime> bookedDates = new List<DateTime>();
             foreach (var reservation in reservations)

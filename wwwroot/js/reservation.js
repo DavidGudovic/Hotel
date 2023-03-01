@@ -25,7 +25,6 @@ $(document).ready(function () {
         // Enable checkoutpicker
         endDatePicker.prop('disabled', false);
         updatePrices();
-
         // Set checkout datepicker start date to checkin date
         endDatePicker.datepicker('setStartDate', startDate);
 
@@ -95,9 +94,9 @@ $(document).ready(function () {
         // Calculate the new subtotal and total price
         var startDate = checkinInput.datepicker('getDate');
         var endDate = checkoutInput.datepicker('getDate');
-        var numDays = (endDate - startDate) / (1000 * 60 * 60 * 24) + 1;
-        var numGuests = guestsInput.val();
-        var subtotal = numDays * numGuests * pricePerDay;
+        var numDays = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24) + 1);
+        var numGuests = Math.round(guestsInput.val());
+        var subtotal = Math.round(numDays * numGuests * pricePerDay);
         var coupon = couponInput.val();
         var total = calculateTotal(subtotal, coupon);
 
@@ -113,6 +112,7 @@ $(document).ready(function () {
             discount = 10; // 10% discount for valid coupon
         }
         var total = subtotal - (subtotal * discount / 100);
+        console.log(total);
         return total;
     }
 

@@ -33,3 +33,17 @@ html {
 td.day.disabled{
     color: orangered !important;
 }
+
+/* Reservation hisotry css*/
+
+.status-Rezervisana {
+    color: orange;
+}
+
+.status-Završena {
+    color: green;
+}
+
+.status-Otkazana {
+    color: red;
+}

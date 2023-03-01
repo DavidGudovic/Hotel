@@ -61,9 +61,31 @@ namespace Hotel.Models.Services
         //NOTE: Useless in this project as there's only one user, but would be useful if multiple people were making a reservation on the same apartment in the same time
         public bool ValidateReservationDate(DateTime checkin, DateTime checkout, int ponudaID)
         {
-            return !rezervacijaRepository.GetAllRezervacijeByPonuda(ponudaID).Select(rez => new { rez.DatumPocetka, rez.DatumKraja }).ToList().Any(r =>
-                (checkin <= r.DatumKraja) && (checkout >= r.DatumPocetka)
+            return !rezervacijaRepository.GetAllRezervacijeByPonuda(ponudaID)
+                .Where(rez=> rez.Status == Status.Rezervisana)
+                .Select(rez => new { rez.DatumPocetka, rez.DatumKraja })
+                .ToList().Any(r =>(checkin <= r.DatumKraja) && (checkout >= r.DatumPocetka)
             ); 
+
+        }
+
+        public List<RezervacijaBO>  ReservationHistory(string name)
+        {
+            List<RezervacijaBO> rezervacija = (List<RezervacijaBO>)rezervacijaRepository.GetAllRezervacijeByUser(korisnikRepository.GetKorisnikByUsername(name).KorisnikID);
+            return rezervacija;
+        }
+
+        //Nullifies the coupon tied to the reservation and sets the status to Canceled
+        public void CancelReservation(int rezervacijaID)
+        {
+            RezervacijaBO rezervacija = new RezervacijaBO() { RezervacijaID = rezervacijaID, Status = Status.Otkazana };
+            KuponBO? kupon = kuponRepository.GetKuponByRezervacija(rezervacijaID);
+            if (kupon != null)
+            {
+                // Sets coupon gotten from the reservation to Used
+                kuponService.ApplyCoupon(kupon.KuponID, rezervacija);
+            }
+            rezervacijaRepository.UpdateRezervacija(rezervacija, rezervacijaID);
 
         }
     }
