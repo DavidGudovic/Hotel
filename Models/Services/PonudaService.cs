@@ -48,5 +48,16 @@ namespace Hotel.Models.Services
             }
             return bookedDates.OrderBy(c => c).ToList(); ;
         }
+
+        // Returns a list of all apartments with the number of their reservations
+        public List<PonudaBO> AllPonude()
+        {
+            List<PonudaBO> ponude = (List<PonudaBO>)ponudaRepository.GetAllPonude();
+            foreach (PonudaBO ponuda in ponude)
+            {
+                ponuda.BrojRezervacija = rezervacijaRepository.CountRezervacijeByPonudaID(ponuda.PonudaID);
+            }
+            return ponude;
+        }
     }
 }

@@ -29,10 +29,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Ponuda" asp-action="Index">Ponuda</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("Admin"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Info">O Zlatiboru</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Administracija
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="KorisnikAdmin" asp-action="Index">Korisnici</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="RezervacijaAdmin" asp-action="Index">Rezervacije</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="PonudaAdmin" asp-action="Index">Ponuda</a></li>
+                                </ul>
                             </li>
                         }               
                     </ul>

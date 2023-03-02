@@ -47,3 +47,21 @@ td.day.disabled{
 .status-Otkazana {
     color: red;
 }
+
+/*Admin panel css*/
+.admin-link:hover{
+    color:cornflowerblue;
+}
+
+.admin-link-selected{
+    color:darkgray;
+}
+.icon-delete{
+    color: red;
+    background-color: transparent;
+    border: 0px;
+}
+
+.icon-add{
+    color: forestgreen;
+}

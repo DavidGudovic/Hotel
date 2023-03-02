@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model List<KorisnikBO>
+
+}
+<div class="container my-4">
+    <h2 class="text-center py-4 my-2">Administratorski panel</h2>
+    <hr>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a asp-controller="KorisnikAdmin" asp-action="Index" class="card-link text-center text-decoration-none link-dark admin-link">
+                <div class="card bg-light admin-link-selected">
+                    <div class="card-body">
+                        <h5 class="card-title">Korisnici</h5>
+                        <p class="card-text">Upravljajte korisničkim profilima</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a asp-controller="PonudaAdmin" asp-action="Index" class="card-link text-center text-decoration-none link-dark admin-link">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">Ponuda</h5>
+                        <p class="card-text">Upravljajte apartmanima u ponudi</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a asp-controller="RezervacijaAdmin" asp-action="Index" class="card-link  text-center text-decoration-none link-dark admin-link">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">Rezervacije</h5>
+                        <p class="card-text">Upravljajte rezervacijama u sistemu</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <hr />
+    </div>
+    <!-- Content -->
+    <div>
+        <div class="table-responsive">
+            <table class="table order-column" id="korisnici">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Korisničko ime</th>
+                        <th>Puno Ime</th>
+                        <th>Broj rezervacija</th>
+                        <th>Uloga</th>
+                        <th data-orderable="false"></th>
+                        <th data-orderable="false"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (KorisnikBO korisnik in Model)
+                    {
+                        <tr>
+                            <td>@korisnik.KorisnikID</td>
+                            <td>@korisnik.KorisnickoIme</td>
+                            <td>@korisnik.Ime @korisnik.Prezime</td>
+                            <td>@korisnik.BrojRezervacija</td>
+                            <td>@korisnik.Rola.ToString()</td>
+                            <td><a href="KorisnikAdmin/Show/?@korisnik.KorisnikID"><i class="bi bi-info-circle"></i></a></td>
+                            <td>
+                                <form asp-action="Delete" asp-controller="KorisnikAdmin" method="post" id="delete @korisnik.KorisnikID">
+                                    <input type="hidden" name="korisnikID" value="@korisnik.KorisnikID">
+                                    <button type="submit" class="icon-delete"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- End Content-->
+</div>
+
+<!-- Inject DataTables -->
+@section Scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" /> <!-- Styling -->
+    <script src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/SerbianLatin.json"></script> <!-- Localisation -->
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script> <!--Script -->
+    <script type="text/javascript" src="~/js/tables.js"></script> <!-- My tables script -->
+}

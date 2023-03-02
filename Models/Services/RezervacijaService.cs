@@ -88,5 +88,10 @@ namespace Hotel.Models.Services
             rezervacijaRepository.UpdateRezervacija(rezervacija, rezervacijaID);
 
         }
+
+        public List<RezervacijaBO> AllRezervacije()
+        {
+            return (List<RezervacijaBO>)rezervacijaRepository.GetAllRezervacije();
+        }
     }
 }

@@ -18,5 +18,7 @@ namespace Hotel.Models
         [EmailAddress(ErrorMessage = "Invalidna email adresa")]
         public string Email { get; set; }
         public Role Rola { get; set; }
+        //This value isnt stored in the database, and isnt in the Korisnik Model, but is useful in the system
+        public int BrojRezervacija { get; set; }
     }
 }

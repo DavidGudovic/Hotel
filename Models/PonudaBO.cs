@@ -9,5 +9,8 @@
         public string Slika { get; set; }
         public float CenaPoDanu { get; set; }
         public Tip Tip { get; set; }
+
+        //value isnt stored in database and isnt in Ponuda model but is useful in the system
+        public int BrojRezervacija { get; set; }
     }
 }

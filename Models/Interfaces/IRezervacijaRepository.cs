@@ -9,5 +9,7 @@
         public IEnumerable<RezervacijaBO> GetAllRezervacije();
         public IEnumerable<RezervacijaBO> GetAllRezervacijeByUser(int korisnikID);
         public IEnumerable<RezervacijaBO> GetAllRezervacijeByPonuda(int ponudaID);
+        public int CountRezervacijeByKorisnikID(int korisnikID);
+        public int CountRezervacijeByPonudaID(int ponudaID);
     }
 }

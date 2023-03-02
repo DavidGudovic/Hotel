@@ -10,7 +10,7 @@ namespace Hotel.Models.Services
     public class KorisnikService
     {
         private IKorisnikRepository korisnikRepository = new KorisnikRepository();
-
+        private IRezervacijaRepository rezervacijaRepository= new RezervacijaRepository();
 
         //Update users information
         public KorisnikBO UpdateKorisnik(KorisnikBO korisnik)
@@ -60,6 +60,17 @@ namespace Hotel.Models.Services
         public void DeleteKorisnik(int korisnikID)
         {
            korisnikRepository.RemoveKorisnik(korisnikRepository.GetKorisnikByID(korisnikID));
+        }
+
+        // Returns a list of all users with the number of their reservations
+        public List<KorisnikBO> AllKorisnici()
+        {
+            List<KorisnikBO> korisnici = (List<KorisnikBO>)korisnikRepository.GetAllKorisnike();
+            foreach(KorisnikBO korisnik in korisnici)
+            {
+                korisnik.BrojRezervacija = rezervacijaRepository.CountRezervacijeByKorisnikID(korisnik.KorisnikID);
+            }
+            return korisnici;
         }
     }
 }

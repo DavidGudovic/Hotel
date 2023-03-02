@@ -114,5 +114,10 @@ namespace Hotel.Models.EFRepositories
                 throw;
             }
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

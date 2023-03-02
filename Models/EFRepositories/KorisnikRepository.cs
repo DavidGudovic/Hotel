@@ -123,5 +123,6 @@ namespace Hotel.Models.EFRepositories
                 throw;
             }
         }
+
     }
 }

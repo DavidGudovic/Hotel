@@ -1,0 +1,96 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model List<RezervacijaBO>
+}
+<div class="container my-4">
+    <h2 class="text-center py-4 my-2">Administratorski panel</h2>
+    <hr>
+    <!-- Navbar -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a asp-controller="KorisnikAdmin" asp-action="Index" class="card-link text-center text-decoration-none link-dark admin-link">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">Korisnici</h5>
+                        <p class="card-text">Upravljajte korisničkim profilima</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a asp-controller="PonudaAdmin" asp-action="Index" class="card-link text-center text-decoration-none link-dark admin-link">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">Ponuda</h5>
+                        <p class="card-text">Upravljajte apartmanima u ponudi</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a asp-controller="RezervacijaAdmin" asp-action="Index" class="card-link  text-center text-decoration-none link-dark admin-link">
+                <div class="card bg-light  admin-link-selected">
+                    <div class="card-body">
+                        <h5 class="card-title">Rezervacije</h5>
+                        <p class="card-text">Upravljajte rezervacijama u sistemu</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <hr />
+    </div>
+    <!-- End navbar -->
+    <!-- Content -->
+    <div>
+        <div class="table-responsive">
+            <table class="table order-column" id="ponude">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Korisnik</th>
+                        <th>PonudaID</th>
+                        <th>Trajanje</th>
+                        <th>Cena</th>
+                        <th>Status</th>
+                        <th data-orderable="false"></th>
+                        <th data-orderable="false"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (RezervacijaBO rezervacija in Model)
+                    {
+                        <tr>
+                            <td>@rezervacija.RezervacijaID</td>
+                            <td>@rezervacija.Korisnik.KorisnickoIme</td>
+                            <td>@rezervacija.Ponuda.Tip.ToString() @rezervacija.Ponuda.PonudaID</td>
+                            <td>@((rezervacija.DatumKraja - rezervacija.DatumPocetka).Days + 1) Dana</td>
+                            <td>@rezervacija.Cena RSD</td>
+                            <td>@rezervacija.Status.ToString()</td>
+                            <td><a href="PonudaAdmin/Show/?@rezervacija.RezervacijaID"><i class="bi bi-info-circle"></i></a></td>
+                            <td>
+                                <form asp-action="Delete" asp-controller="RezervacijaAdmin" method="post" id="delete @rezervacija.RezervacijaID">
+                                    <input type="hidden" name="rezervacijaID" value="@rezervacija.RezervacijaID">
+                                    <button type="submit" class="icon-delete"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- End Content-->
+</div>
+
+<!-- Inject DataTables -->
+@section Scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" /> <!-- Styling -->
+    <script src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/SerbianLatin.json"></script> <!-- Localisation -->
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script> <!--Script -->
+    <script type="text/javascript" src="~/js/tables.js"></script> <!-- My tables script -->
+}
+
+
