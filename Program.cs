@@ -1,4 +1,5 @@
 using Hotel.HostedServices;
+using Hotel.Middleware;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel;
@@ -12,6 +13,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.AccessDeniedPath = "/Error/Denied";
 });
 builder.Services.AddHostedService<ReservationEndService>(); // Daily scheduled to check if a reservation is over
+
 
 var app = builder.Build();
 
@@ -29,6 +31,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<InvalidatedUserMiddleware>();// Custom Middleware
 
 app.MapControllerRoute(
     name: "default",
