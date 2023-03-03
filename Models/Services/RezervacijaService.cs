@@ -93,5 +93,10 @@ namespace Hotel.Models.Services
         {
             return (List<RezervacijaBO>)rezervacijaRepository.GetAllRezervacije();
         }
+
+        public void DeleteReservation(int rezervacijaID)
+        {
+            rezervacijaRepository.RemoveRezervacija(rezervacijaID);
+        }
     }
 }

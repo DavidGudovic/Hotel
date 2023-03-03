@@ -1,4 +1,5 @@
-﻿using Hotel.Models.EFRepositories;
+﻿using Hotel.Middleware;
+using Hotel.Models.EFRepositories;
 using Hotel.Models.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -71,6 +72,22 @@ namespace Hotel.Models.Services
                 korisnik.BrojRezervacija = rezervacijaRepository.CountRezervacijeByKorisnikID(korisnik.KorisnikID);
             }
             return korisnici;
+        }
+
+        //Invalidates the user for next request and removes him from database
+        public void RemoveUser(int korisnikID)
+        {
+            try
+            {
+                // Make the user logout on next request
+                InvalidatedUsersList.AddInvalidatedUser(korisnikRepository.GetKorisnikByID(korisnikID).KorisnickoIme);
+                korisnikRepository.RemoveKorisnik(new KorisnikBO() { KorisnikID = korisnikID });
+            }
+            catch
+            {
+                throw;
+            }
+
         }
     }
 }

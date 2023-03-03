@@ -44,8 +44,31 @@
     <!-- End navbar -->
     <!-- Content -->
     <div>
+          <!-- Status messages-->
+        <div class="col justify-content-center align-content-center my-3">
+            @if (TempData["Message"] is not null)
+            {
+                @if (!String.IsNullOrEmpty(TempData["Message"].ToString()))
+                {
+                    <div class="alert alert-success mt-4 text-center" role="alert">
+                        @Html.Raw(@TempData["Message"].ToString())
+                    </div>
+                }
+            }
+
+            @if (TempData["Error"] is not null)
+            {
+                @if (!String.IsNullOrEmpty(TempData["Error"].ToString()))
+                {
+                    <div class="alert alert-danger mt-4 text-center" role="alert">
+                        @TempData["Error"].ToString()
+                    </div>
+                }
+            }
+        </div>
+        <!-- Table -->
         <div class="table-responsive">
-            <table class="table order-column" id="ponude">
+            <table class="table order-column table-hover" id="ponude">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -54,7 +77,6 @@
                         <th>Trajanje</th>
                         <th>Cena</th>
                         <th>Status</th>
-                        <th data-orderable="false"></th>
                         <th data-orderable="false"></th>
                     </tr>
                 </thead>
@@ -68,11 +90,12 @@
                             <td>@((rezervacija.DatumKraja - rezervacija.DatumPocetka).Days + 1) Dana</td>
                             <td>@rezervacija.Cena RSD</td>
                             <td>@rezervacija.Status.ToString()</td>
-                            <td><a href="PonudaAdmin/Show/?@rezervacija.RezervacijaID"><i class="bi bi-info-circle"></i></a></td>
-                            <td>
-                                <form asp-action="Delete" asp-controller="RezervacijaAdmin" method="post" id="delete @rezervacija.RezervacijaID">
+                            <td> 
+                                <form asp-action="Delete" asp-controller="RezervacijaAdmin" method="post" id="delete @rezervacija.RezervacijaID" class="confirm-submit">
                                     <input type="hidden" name="rezervacijaID" value="@rezervacija.RezervacijaID">
-                                    <button type="submit" class="icon-delete"><i class="bi bi-trash"></i></button>
+                                    <button type="submit" class="icon-delete">
+                                        <i class="bi bi-trash" data-toggle="tooltip" data-placement="right" title="Izbriši rezervaciju"></i>
+                                        </button>
                                 </form>
                             </td>
                         </tr>
@@ -88,9 +111,8 @@
 <!-- Inject DataTables -->
 @section Scripts{
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" /> <!-- Styling -->
-    <script src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/SerbianLatin.json"></script> <!-- Localisation -->
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script> <!--Script -->
-    <script type="text/javascript" src="~/js/tables.js"></script> <!-- My tables script -->
+    <script type="text/javascript" src="~/js/admin.js"></script> <!-- My tables script -->
 }
 
 

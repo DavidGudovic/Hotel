@@ -1,10 +1,12 @@
 ﻿using Hotel.Models;
 using Hotel.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hotel.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RezervacijaAdminController : Controller
     {
         // GET: RezervacijaAdminController
@@ -20,66 +22,22 @@ namespace Hotel.Controllers
             return View();
         }
 
-        // GET: RezervacijaAdminController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: RezervacijaAdminController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: RezervacijaAdminController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: RezervacijaAdminController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: RezervacijaAdminController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: RezervacijaAdminController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int rezervacijaID, RezervacijaService rezervacijaService)
         {
             try
             {
+                rezervacijaService.DeleteReservation(rezervacijaID);
+                TempData["Message"] = "Rezervacija sa ID-em " + rezervacijaID + " uspešno obrisana";
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                TempData["Error"] = "Došlo je do greške pri brisanju rezervacije";
+                return RedirectToAction(nameof(Index));
             }
         }
     }

@@ -2,9 +2,12 @@
 using Hotel.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Hotel.Middleware;
 
 namespace Hotel.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PonudaAdminController : Controller
     {
         // GET: PonudaAdminController
@@ -13,11 +16,17 @@ namespace Hotel.Controllers
             List<PonudaBO> ponude = ponudaService.AllPonude();
             return View(ponude);
         }
-
-        // GET: PonudaAdminController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Update(int ponudaID,PonudaService ponudaService)
         {
-            return View();
+            PonudaBO ponuda = ponudaService.GetByID(ponudaID);
+            return View(ponuda);
+        }
+
+        [HttpPost]
+        public IActionResult Update(PonudaBO ponuda, PonudaService ponudaService)
+        {
+            // TODO Work
+            return RedirectToAction("Update");
         }
 
         // GET: PonudaAdminController/Create
@@ -41,45 +50,21 @@ namespace Hotel.Controllers
             }
         }
 
-        // GET: PonudaAdminController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: PonudaAdminController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PonudaAdminController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: PonudaAdminController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int ponudaID,PonudaService ponudaService)
         {
             try
             {
+                ponudaService.RemovePonuda(ponudaID);
+                TempData["Message"] = "Ponuda sa ID-em " + ponudaID + " uspešno obrisana";
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                TempData["Error"] = "Došlo je do greške pri brisanju ponude";
+                return RedirectToAction(nameof(Index));
             }
         }
     }

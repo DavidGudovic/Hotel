@@ -43,8 +43,31 @@
     </div>
     <!-- Content -->
     <div>
+        <!-- Status messages-->
+        <div class="col justify-content-center align-content-center my-3">
+            @if (TempData["Message"] is not null)
+            {
+                @if (!String.IsNullOrEmpty(TempData["Message"].ToString()))
+                {
+                    <div class="alert alert-success mt-4 text-center" role="alert">
+                        @Html.Raw(@TempData["Message"].ToString())
+                    </div>
+                }
+            }
+
+            @if (TempData["Error"] is not null)
+            {
+                @if (!String.IsNullOrEmpty(TempData["Error"].ToString()))
+                {
+                    <div class="alert alert-danger mt-4 text-center" role="alert">
+                        @TempData["Error"].ToString()
+                    </div>
+                }
+            }
+        </div>
+        <!-- Table -->
         <div class="table-responsive">
-            <table class="table order-column" id="korisnici">
+            <table class="table order-column table-hover" id="korisnici">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -65,11 +88,17 @@
                             <td>@korisnik.Ime @korisnik.Prezime</td>
                             <td>@korisnik.BrojRezervacija</td>
                             <td>@korisnik.Rola.ToString()</td>
-                            <td><a href="KorisnikAdmin/Show/?@korisnik.KorisnikID"><i class="bi bi-info-circle"></i></a></td>
                             <td>
-                                <form asp-action="Delete" asp-controller="KorisnikAdmin" method="post" id="delete @korisnik.KorisnikID">
+                                <a href="KorisnikAdmin/Update/?@korisnik.KorisnikID">
+                                    <i class="bi bi-info-circle" data-toggle="tooltip" data-placement="right" title="Izmeni korisnika"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <form asp-action="Delete" asp-controller="KorisnikAdmin" method="post" id="delete @korisnik.KorisnikID" class="confirm-submit">
                                     <input type="hidden" name="korisnikID" value="@korisnik.KorisnikID">
-                                    <button type="submit" class="icon-delete"><i class="bi bi-trash"></i></button>
+                                    <button type="submit" class="icon-delete">
+                                        <i class="bi bi-trash" data-toggle="tooltip" data-placement="right" title="Izbriši korisnika"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -85,7 +114,6 @@
 <!-- Inject DataTables -->
 @section Scripts{
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" /> <!-- Styling -->
-    <script src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/SerbianLatin.json"></script> <!-- Localisation -->
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script> <!--Script -->
-    <script type="text/javascript" src="~/js/tables.js"></script> <!-- My tables script -->
+    <script type="text/javascript" src="~/js/admin.js"></script> <!-- My tables script -->
 }

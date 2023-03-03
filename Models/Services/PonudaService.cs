@@ -59,5 +59,15 @@ namespace Hotel.Models.Services
             }
             return ponude;
         }
+
+        public void RemovePonuda(int ponudaID)
+        {
+           ponudaRepository.RemovePonuda(ponudaID);
+        }
+
+        public PonudaBO GetByID(int ponudaID)
+        {
+            return ponudaRepository.GetById(ponudaID);
+        }
     }
 }

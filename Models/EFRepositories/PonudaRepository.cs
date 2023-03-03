@@ -47,7 +47,15 @@ namespace Hotel.Models.EFRepositories
 
         public void RemovePonuda(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                hotelEntities.Ponude.Remove(hotelEntities.Ponude.Where(pon => pon.PonudaID== id).Single());
+                hotelEntities.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public void UpdatePonuda(PonudaBO ponuda, int id)

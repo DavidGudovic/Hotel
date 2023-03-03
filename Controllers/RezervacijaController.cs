@@ -1,5 +1,6 @@
 ﻿using Hotel.Models;
 using Hotel.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hotel.Controllers
@@ -72,7 +73,7 @@ namespace Hotel.Controllers
 
             return RedirectToAction("Show", "Ponuda", new { ponudaID = ponuda_id });
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult Update(RezervacijaService rezervacijaService, int rezervacijaID)
         {

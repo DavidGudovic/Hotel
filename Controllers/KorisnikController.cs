@@ -9,6 +9,7 @@ using System.Security.Claims;
 
 namespace Hotel.Controllers
 {
+    [Authorize]
     public class KorisnikController : Controller
     {
         //Return a user information index page

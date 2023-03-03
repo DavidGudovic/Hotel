@@ -168,7 +168,15 @@ namespace Hotel.Models.EFRepositories
 
         public void RemoveRezervacija(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                hotelEntities.Rezervacije.Remove(hotelEntities.Rezervacije.Where(rez => rez.RezervacijaID == id).Single());
+                hotelEntities.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public int CountRezervacijeByKorisnikID(int korisnikID)

@@ -42,8 +42,31 @@
     </div>
     <!-- Content -->
     <div>
+          <!-- Status messages-->
+        <div class="col justify-content-center align-content-center my-3">
+            @if (TempData["Message"] is not null)
+            {
+                @if (!String.IsNullOrEmpty(TempData["Message"].ToString()))
+                {
+                    <div class="alert alert-success mt-4 text-center" role="alert">
+                        @Html.Raw(@TempData["Message"].ToString())
+                    </div>
+                }
+            }
+
+            @if (TempData["Error"] is not null)
+            {
+                @if (!String.IsNullOrEmpty(TempData["Error"].ToString()))
+                {
+                    <div class="alert alert-danger mt-4 text-center" role="alert">
+                        @TempData["Error"].ToString()
+                    </div>
+                }
+            }
+        </div>
+        <!-- Table -->
         <div class="table-responsive">
-            <table class="table order-column" id="ponude">
+            <table class="table order-column table-hover" id="ponude">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -52,7 +75,10 @@
                         <th>Broj kreveta</th>
                         <th>Broj rezervacija</th>
                         <th data-orderable="false"></th>
-                        <th data-orderable="false"><i class="bi bi-plus-circle icon-add"></i></th>
+                        <th data-orderable="false">
+                            <i class="bi bi-plus-circle icon-add" data-toggle="tooltip" data-placement="right" title="Dodaj ponudu">
+
+                            </i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,11 +90,15 @@
                             <td>@ponuda.Sprat</td>
                             <td>@ponuda.BrojKreveta</td>
                             <td>@ponuda.BrojRezervacija</td>
-                            <td><a href="PonudaAdmin/Show/?@ponuda.PonudaID"><i class="bi bi-info-circle"></i></a></td>
+                            <td><a href="PonudaAdmin/Update/?@ponuda.PonudaID">
+                                    <i class="bi bi-info-circle" data-toggle="tooltip" data-placement="right" title="Izmeni ponudu"></i>
+                                </a></td>
                             <td>
-                                <form asp-action="Delete" asp-controller="PonudaAdmin" method="post" id="delete @ponuda.PonudaID">
+                                <form asp-action="Delete" asp-controller="PonudaAdmin" method="post" id="delete @ponuda.PonudaID" class="confirm-submit">
                                     <input type="hidden" name="ponudaID" value="@ponuda.PonudaID">
-                                    <button type="submit" class="icon-delete"><i class="bi bi-trash"></i></button>
+                                    <button type="submit" class="icon-delete">
+                                        <i class="bi bi-trash" data-toggle="tooltip" data-placement="right" title="Izbriši ponudu"></i>
+                                        </button>
                                 </form>
                             </td>
                         </tr>
@@ -84,7 +114,6 @@
 <!-- Inject DataTables -->
 @section Scripts{
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" /> <!-- Styling -->
-    <script src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/SerbianLatin.json"></script> <!-- Localisation -->
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script> <!--Script -->
-    <script type="text/javascript" src="~/js/tables.js"></script> <!-- My tables script -->
+    <script type="text/javascript" src="~/js/admin.js"></script> <!-- My tables script -->
 }

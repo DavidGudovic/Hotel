@@ -1,24 +1,22 @@
-﻿using Hotel.Models;
+﻿using Hotel.Middleware;
+using Hotel.Models;
 using Hotel.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hotel.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class KorisnikAdminController : Controller
     {
-
+        //Handles request for displaying a list(index) of all site users
         public ActionResult Index(KorisnikService korisnikService)
         {
             List<KorisnikBO> korisnici = korisnikService.AllKorisnici();
             return View(korisnici);
         }
 
-        // GET: KorisnikAdminController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: KorisnikAdminController/Create
         public ActionResult Create()
@@ -41,45 +39,21 @@ namespace Hotel.Controllers
             }
         }
 
-        // GET: KorisnikAdminController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: KorisnikAdminController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: KorisnikAdminController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: KorisnikAdminController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int korisnikID, KorisnikService korisnikService)
         {
             try
             {
+                //Remove the user
+                korisnikService.RemoveUser(korisnikID);
+                TempData["Message"] = "Korisnik sa ID-em " + korisnikID + " uspešno obrisan";
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                TempData["Error"] = "Došlo je do greške pri brisanju korisnika";
+                return RedirectToAction(nameof(Index));
             }
         }
     }
