@@ -18,5 +18,14 @@
         }
     });  // Rezervacije table, most of the customization done in html
 
+
+    //Confirm submit of deletes
+    $('.confirm-submit').submit(function (event) {
+        var confirmation = confirm('Da li ste sigurni da želite da obrišete ovu stavku?');
+        if (!confirmation) {
+            event.preventDefault();
+        }
+    });
+
 });
 
