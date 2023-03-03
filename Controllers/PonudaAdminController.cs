@@ -37,7 +37,6 @@ namespace Hotel.Controllers
 
         // POST: PonudaAdminController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
             try

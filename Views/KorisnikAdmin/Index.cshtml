@@ -50,7 +50,7 @@
                 @if (!String.IsNullOrEmpty(TempData["Message"].ToString()))
                 {
                     <div class="alert alert-success mt-4 text-center" role="alert">
-                        @Html.Raw(@TempData["Message"].ToString())
+                        @TempData["Message"].ToString()
                     </div>
                 }
             }
@@ -89,7 +89,7 @@
                             <td>@korisnik.BrojRezervacija</td>
                             <td>@korisnik.Rola.ToString()</td>
                             <td>
-                                <a href="KorisnikAdmin/Update/?@korisnik.KorisnikID">
+                                <a asp-action="Update" asp-controller="KorisnikAdmin" asp-route-korisnikID="@korisnik.KorisnikID">
                                     <i class="bi bi-info-circle" data-toggle="tooltip" data-placement="right" title="Izmeni korisnika"></i>
                                 </a>
                             </td>

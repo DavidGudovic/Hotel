@@ -17,26 +17,42 @@ namespace Hotel.Controllers
             return View(korisnici);
         }
 
-
-        // GET: KorisnikAdminController/Create
-        public ActionResult Create()
+        //Handles requests to show user update form
+        public ActionResult Update(KorisnikService korisnikService, int korisnikID)
         {
-            return View();
+            KorisnikBO korisnik = korisnikService.GetKorisnik(korisnikID);
+            return View(korisnik);
         }
 
-        // POST: KorisnikAdminController/Create
+        //Handles request to update user information
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Update(KorisnikBO korisnik, KorisnikService korisnikService, string? new_password)
         {
+            ModelState.Remove("Password"); // Password doesnt need to be validated for administrators
+            if (!ModelState.IsValid)
+            {
+                return View("Update", korisnik);
+            }
+
+            if (!String.IsNullOrEmpty(new_password))
+            {
+                korisnik.Password = new_password;
+            }
+
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                KorisnikBO new_korisnik = korisnikService.UpdateKorisnik(korisnik, String.IsNullOrEmpty(new_password));
+                TempData["Message"] = "Korisnik uspešno izmenjen";
+                return View("Update", new_korisnik);
             }
             catch
             {
-                return View();
+                TempData["Error"] = "Došlo je do greške pri izmeni korisnika, korisničko ime ili email verovatno postoje";
+                return View("Update", korisnik);
             }
+
+
         }
 
         // POST: KorisnikAdminController/Delete/5

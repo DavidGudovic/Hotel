@@ -1,0 +1,85 @@
+﻿@{
+    @model Hotel.Models.KorisnikBO
+
+}
+<div class="container-sm mt-4">
+    <div class="card p-5">
+        <div class="card-body px-4">
+            <h2 class="text-center">Profil korisnika - @Model.KorisnickoIme</h2>
+            <hr>
+            <form asp-controller="KorisnikAdmin" asp-action="Update" method="post">
+                <input type="hidden" asp-for="KorisnikID" />
+                <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Email" type="text" class="form-control" id="inputEmail" placeholder="Korisnikov Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputUsername" class="col-sm-2 col-form-label">Korisničko ime</label>
+                    <div class="col-sm-10">
+                        <input asp-for="KorisnickoIme" type="text" class="form-control" id="inputUsername" placeholder="Korisničko ime" />
+                        <span asp-validation-for="KorisnickoIme" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputIme" class="col-sm-2 col-form-label">Ime</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Ime" type="text" class="form-control" id="inputIme" placeholder="Ime korisnika">
+                        <span asp-validation-for="Ime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputPrezime" class="col-sm-2 col-form-label">Prezime</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Prezime" type="text" class="form-control" id="inputPrezime" placeholder="Prezime korisnika">
+                        <span asp-validation-for="Prezime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputNewPassword" class="col-sm-2 col-form-label">Nova Lozinka</label>
+                    <div class="col-sm-10">
+                        <input name="new_password" type="password" class="form-control" id="inputNewPassword" placeholder="Ostavite prazno ako ne menjate">
+                        <span class="text-danger">@ViewBag.ErrorNewPassword</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputRole" class="col-sm-2 col-form-label">Rola</label>
+                    <div class="col-sm-10">
+                        <select asp-for="Rola" class="form-select">
+                            <option  value="@Role.Korisnik">@Role.Korisnik.ToString()</option>
+                            <option value="@Role.Admin">@Role.Admin.ToString()</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Sačuvaj izmene</button>
+                    </div>
+                </div>
+                @if (TempData["Message"] is not null)
+                {
+                    @if (!String.IsNullOrEmpty(TempData["Message"].ToString()))
+                    {
+                        <div class="alert alert-success mt-4 text-center" role="alert">
+                              @TempData["Message"].ToString()
+                        </div>
+                    }
+                }
+
+                @if (TempData["Error"] is not null)
+                {
+                    @if (!String.IsNullOrEmpty(TempData["Error"].ToString()))
+                    {
+                        <div class="alert alert-danger mt-4 text-center" role="alert">
+                            @TempData["Error"].ToString()
+                        </div>
+                    }
+                }
+
+            </form>
+        </div>
+    </div>
+</div>

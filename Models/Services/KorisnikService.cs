@@ -14,7 +14,7 @@ namespace Hotel.Models.Services
         private IRezervacijaRepository rezervacijaRepository= new RezervacijaRepository();
 
         //Update users information
-        public KorisnikBO UpdateKorisnik(KorisnikBO korisnik)
+        public KorisnikBO UpdateKorisnik(KorisnikBO korisnik, bool admin_changed_password = false)
         {
             KorisnikBO izmenjenKorisnik = new KorisnikBO()
             {
@@ -22,10 +22,17 @@ namespace Hotel.Models.Services
                 Ime = korisnik.Ime,
                 Prezime = korisnik.Prezime,
                 Email = korisnik.Email,
-                Rola = korisnik.Rola,
-                Password = BCrypt.Net.BCrypt.HashPassword(korisnik.Password)
-
+                Rola = korisnik.Rola
             };
+
+            if (admin_changed_password)
+            {
+                izmenjenKorisnik.Password = korisnikRepository.GetKorisnikByID(korisnik.KorisnikID).Password;
+            }
+            else
+            {
+                izmenjenKorisnik.Password = BCrypt.Net.BCrypt.HashPassword(korisnik.Password);
+            }
 
             try
             {
@@ -88,6 +95,11 @@ namespace Hotel.Models.Services
                 throw;
             }
 
+        }
+        //Returns the user
+        public KorisnikBO GetKorisnik(int korisnikID)
+        {
+            return korisnikRepository.GetKorisnikByID(korisnikID);
         }
     }
 }

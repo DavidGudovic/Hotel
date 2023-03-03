@@ -51,7 +51,7 @@
                 @if (!String.IsNullOrEmpty(TempData["Message"].ToString()))
                 {
                     <div class="alert alert-success mt-4 text-center" role="alert">
-                        @Html.Raw(@TempData["Message"].ToString())
+                         @TempData["Message"].ToString()
                     </div>
                 }
             }
