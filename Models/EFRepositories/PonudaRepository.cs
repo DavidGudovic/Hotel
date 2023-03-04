@@ -7,7 +7,24 @@ namespace Hotel.Models.EFRepositories
         private HotelContext hotelEntities = new HotelContext();
         public void AddPonuda(PonudaBO ponuda)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Ponuda ponudaEntity = new Ponuda()
+                {
+                    BrojKreveta = ponuda.BrojKreveta,
+                    Sprat = ponuda.Sprat,
+                    CenaPoDanu = ponuda.CenaPoDanu,
+                    Tip = ponuda.Tip,
+                    Slika = ponuda.Slika,
+                    Opis = ponuda.Opis,
+                };
+                hotelEntities.Ponude.Add(ponudaEntity);
+                hotelEntities.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public IEnumerable<PonudaBO> GetAllPonude()
@@ -58,9 +75,23 @@ namespace Hotel.Models.EFRepositories
             }
         }
 
-        public void UpdatePonuda(PonudaBO ponuda, int id)
+        public void UpdatePonuda(PonudaBO ponuda, int ponudaID)
         {
-            throw new NotImplementedException();
+            Ponuda ponudaEntity = hotelEntities.Ponude.Where(pon => pon.PonudaID == ponudaID).Single();
+            ponudaEntity.Sprat = ponuda.Sprat;
+            ponudaEntity.Opis = ponuda.Opis;
+            ponudaEntity.Tip = ponuda.Tip;
+            ponudaEntity.Slika = ponuda.Slika;
+            ponudaEntity.BrojKreveta = ponuda.BrojKreveta;
+            ponudaEntity.CenaPoDanu = ponuda.CenaPoDanu;
+            try
+            {
+                hotelEntities.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

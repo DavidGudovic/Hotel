@@ -10,16 +10,30 @@
     <div class="row card">
         <h1 class="text-center my-3">Izmeni ponudu</h1>
         <hr />
-        <form method="post" asp-action="Create" enctype="multipart/form-data">
+        @if (!String.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-success mt-2 col-8 mx-auto text-center" role="alert">
+                @ViewBag.Message
+            </div>
+        }
+
+        @if (!String.IsNullOrEmpty(ViewBag.Error))
+        {
+            <div class="alert alert-danger mt-2 col-8 mx-auto text-center" role="alert">
+                @ViewBag.Error
+            </div>
+        }
+        <form method="post" asp-action="Update" asp-controller="PonudaAdmin" enctype="multipart/form-data">
             <div class="row gap-2">
                 <!-- Image-->
                 <div class="col-md">
                     <div class="mb-3">
                         <label class="form-label">Slika:</label>
                         <div class="input-group">
+                            <input asp-for="Slika" type="hidden" />
                             <input name="image_file" type="file" class="form-control" id="image-input" />
                         </div>
-                        <span asp-validation-for="Slika" class="text-danger"></span>
+                        <span class="text-danger">@ViewBag.ImageError</span>
                         <div class="mt-4">
                             <img id="preview-image" class="img-fluid" src="~/images/apartments/@(Model.Slika).jpg" />
                         </div>
@@ -29,16 +43,16 @@
                 <div class="col-md">
                     <div class="mb-3">
                         <label class="form-label">PonudaID:</label>
-                        <input asp-for="PonudaID" class="form-control" readonly/>
+                        <input asp-for="PonudaID" class="form-control" readonly />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Broj Kreveta:</label>
-                        <input asp-for="BrojKreveta" class="form-control" />
+                        <input asp-for="BrojKreveta" type="number" min="1" max="10" class="form-control" />
                         <span asp-validation-for="BrojKreveta" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Cena Po Danu:</label>
-                        <input asp-for="CenaPoDanu" class="form-control" />
+                        <input asp-for="CenaPoDanu" type="number" min="1" max="100000" class="form-control" />
                         <span asp-validation-for="CenaPoDanu" class="text-danger"></span>
                     </div>
 
@@ -53,7 +67,7 @@
                     </div>
                     <div class="mb-1">
                         <label Sprat" class="form-label">Sprat:</label>
-                        <input asp-for="Sprat" class="form-control" />
+                        <input asp-for="Sprat" type="number" min="1" max="3" class="form-control" />
                         <span asp-validation-for="Sprat" class="text-danger"></span>
                     </div>
                 </div>

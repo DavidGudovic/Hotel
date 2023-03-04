@@ -9,17 +9,31 @@
 <div class="container col-md-8 mt-5">
     <div class="row card">
         <h1 class="text-center my-3">Dodaj u ponudu</h1>
+        <!-- Status messages-->
+        @if (!String.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-success mt-2 col-8 mx-auto text-center" role="alert">
+                @ViewBag.Message
+            </div>
+        }
+
+        @if (!String.IsNullOrEmpty(ViewBag.Error))
+        {
+            <div class="alert alert-danger mt-2 col-8 mx-auto text-center" role="alert">
+                @ViewBag.Error
+            </div>
+        }
         <hr />
-        <form method="post" asp-action="Create" enctype="multipart/form-data">
+        <form method="post" asp-action="Create" asp-controller="PonudaAdmin" enctype="multipart/form-data">
             <div class="row gap-2">
                 <!-- Image-->
                 <div class="col-md">
                     <div class="mb-3">
                         <label class="form-label">Slika:</label>
                         <div class="input-group">
-                            <input name="image_file" type="file" class="form-control" id="image-input"/>
+                            <input name="image_file" type="file" class="form-control" id="image-input" />
                         </div>
-                        <span asp-validation-for="Slika" class="text-danger"></span>
+                        <span class="text-danger">@ViewBag.ImageError</span>
                         <div class="mt-4">
                             <img id="preview-image" class="img-fluid" src="https://via.placeholder.com/800x600.png?text=Slika+Apartmana" />
                         </div>
@@ -33,12 +47,12 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Broj Kreveta:</label>
-                        <input asp-for="BrojKreveta" type="number" min="1" max="10" class="form-control" placeholder="Unesite broj kreveta"/>
+                        <input asp-for="BrojKreveta" type="number" min="1" max="10" class="form-control" value="1" placeholder="Unesite broj kreveta" />
                         <span asp-validation-for="BrojKreveta" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Cena Po Danu:</label>
-                        <input asp-for="CenaPoDanu" type="number" min="1" max="100000" class="form-control" placeholder="Unesite cenu po danu"/>
+                        <input asp-for="CenaPoDanu" type="number" min="1" max="100000" class="form-control" value="1" placeholder="Unesite cenu po danu" />
                         <span asp-validation-for="CenaPoDanu" class="text-danger"></span>
                     </div>
 
@@ -53,7 +67,7 @@
                     </div>
                     <div class="mb-1">
                         <label Sprat" class="form-label">Sprat:</label>
-                        <input asp-for="Sprat" type="number" min="1" max="3" class="form-control" placeholder="Unesite sprat"/>
+                        <input asp-for="Sprat" type="number" min="1" max="3" class="form-control" value="1" placeholder="Unesite sprat" />
                         <span asp-validation-for="Sprat" class="text-danger"></span>
                     </div>
                 </div>

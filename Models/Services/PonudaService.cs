@@ -31,7 +31,7 @@ namespace Hotel.Models.Services
             return ponude;
         }
 
-        //Linq magic
+        //Gets a list of all dates that are unavailable for the passed PonudaID
         public IEnumerable<DateTime> GetUnavailableDates(int ponudaID)
         {
             List<RezervacijaBO> reservations = rezervacijaRepository.GetAllRezervacijeByPonuda(ponudaID).Where(rez => rez.Status == Status.Rezervisana).ToList();
@@ -68,6 +68,16 @@ namespace Hotel.Models.Services
         public PonudaBO GetByID(int ponudaID)
         {
             return ponudaRepository.GetById(ponudaID);
+        }
+
+        public void UpdatePonuda(PonudaBO ponuda)
+        {
+            ponudaRepository.UpdatePonuda(ponuda, ponuda.PonudaID);
+        }
+
+        public void CreatePonuda(PonudaBO ponuda)
+        {
+            ponudaRepository.AddPonuda(ponuda);
         }
     }
 }
