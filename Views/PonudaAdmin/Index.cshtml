@@ -3,6 +3,7 @@
 *@
 @{
     @model List<PonudaBO>
+
 }
 <div class="container my-4">
     <h2 class="text-center py-4 my-2">Administratorski panel</h2>
@@ -42,7 +43,7 @@
     </div>
     <!-- Content -->
     <div>
-          <!-- Status messages-->
+        <!-- Status messages-->
         <div class="col justify-content-center align-content-center my-3">
             @if (TempData["Message"] is not null)
             {
@@ -76,9 +77,8 @@
                         <th>Broj rezervacija</th>
                         <th data-orderable="false"></th>
                         <th data-orderable="false">
-                            <i class="bi bi-plus-circle icon-add" data-toggle="tooltip" data-placement="right" title="Dodaj ponudu">
-
-                            </i></th>
+                            <a asp-action="Create" asp-controller="PonudaAdmin" class="bi bi-plus-circle icon-add" data-toggle="tooltip" data-placement="right" title="Dodaj ponudu"></a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,15 +90,17 @@
                             <td>@ponuda.Sprat</td>
                             <td>@ponuda.BrojKreveta</td>
                             <td>@ponuda.BrojRezervacija</td>
-                            <td><a href="PonudaAdmin/Update/?@ponuda.PonudaID">
+                            <td>
+                                <a asp-action="Update" asp-controller="PonudaAdmin" asp-route-ponudaID="@ponuda.PonudaID">
                                     <i class="bi bi-info-circle" data-toggle="tooltip" data-placement="right" title="Izmeni ponudu"></i>
-                                </a></td>
+                                </a>
+                            </td>
                             <td>
                                 <form asp-action="Delete" asp-controller="PonudaAdmin" method="post" id="delete @ponuda.PonudaID" class="confirm-submit">
                                     <input type="hidden" name="ponudaID" value="@ponuda.PonudaID">
                                     <button type="submit" class="icon-delete">
                                         <i class="bi bi-trash" data-toggle="tooltip" data-placement="right" title="Izbriši ponudu"></i>
-                                        </button>
+                                    </button>
                                 </form>
                             </td>
                         </tr>

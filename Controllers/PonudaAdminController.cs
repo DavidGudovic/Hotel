@@ -25,8 +25,9 @@ namespace Hotel.Controllers
         [HttpPost]
         public IActionResult Update(PonudaBO ponuda, PonudaService ponudaService)
         {
-            // TODO Work
-            return RedirectToAction("Update");
+            //TODO Upload image
+            //ponudaService.UpdatePonuda(ponuda);
+            return View("Update", ponuda);
         }
 
         // GET: PonudaAdminController/Create
@@ -37,7 +38,7 @@ namespace Hotel.Controllers
 
         // POST: PonudaAdminController/Create
         [HttpPost]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(PonudaBO ponuda, IFormFile image_file)
         {
             try
             {
