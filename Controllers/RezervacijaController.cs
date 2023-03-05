@@ -5,14 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hotel.Controllers
 {
+    [Authorize]
     public class RezervacijaController : Controller
     {
+        //Handles requests to display users reservations
         public IActionResult Index(RezervacijaService rezervacijaService)
         {
             List<RezervacijaBO> reservations = rezervacijaService.ReservationHistory(User.Identity.Name);
             return View(reservations);
         }
 
+        //Handles requests to create a reservation
         [HttpPost]
         public IActionResult Create(RezervacijaService rezervacijaService, KuponService kuponService, int ponuda_id, DateTime checkin, DateTime checkout, int guests, string? coupon)
         {
@@ -73,7 +76,7 @@ namespace Hotel.Controllers
 
             return RedirectToAction("Show", "Ponuda", new { ponudaID = ponuda_id });
         }
-        [Authorize]
+        //Handles requests to update reservation status to canceled
         [HttpPost]
         public IActionResult Update(RezervacijaService rezervacijaService, int rezervacijaID)
         {

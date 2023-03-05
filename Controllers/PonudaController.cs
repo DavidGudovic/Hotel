@@ -8,6 +8,7 @@ namespace Hotel.Controllers
 {
     public class PonudaController : Controller
     {
+        //Handles requests for displaying Index of Ponuda resource
         public IActionResult Index(PonudaService ponudaService, int? numOfBeds, int? floor, Tip? tip)
         {
             ViewBag.numOfBeds = numOfBeds;
@@ -16,6 +17,7 @@ namespace Hotel.Controllers
             return View(ponudaService.filterPonude(numOfBeds,floor,tip));
         }
 
+        //Handles requests to show a specific Ponuda resource
         [Authorize]
         [HttpGet]
         public IActionResult Show(int ponudaID, PonudaService ponudaService, PonudaRepository ponudaRepository)
